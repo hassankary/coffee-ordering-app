@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
-
   return (
     <div className=" w-full flex justify-center">
       <div className="min-h-screen w-[414px] bg-[#008C4D] content-center">
