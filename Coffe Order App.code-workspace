@@ -1,0 +1,41 @@
+{
+	"folders": [
+		{
+			"path": "../../Grandvoucher"
+		},
+		{
+			"path": "../unit-testing"
+		},
+		{
+			"path": "../petty"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../../React Native/react-native-1"
+		},
+		{
+			"path": "../../Awanio/awan-repo"
+		},
+		{
+			"path": "../../Awanio/awan-docs"
+		},
+		{
+			"path": "../../Awanio/awan-website-v3"
+		},
+		{
+			"path": "../mongodb/mongo-crud"
+		},
+		{
+			"path": "../fariz/knowledge-test-fullstack-pmn"
+		},
+		{
+			"path": "../address_book_app"
+		},
+		{
+			"path": "../todolocalstorage"
+		}
+	],
+	"settings": {}
+}
