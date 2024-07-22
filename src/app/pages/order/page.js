@@ -159,13 +159,6 @@ export default function Order() {
   const [listOrder, setListOrder] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [menuCards, setMenuCards] = useState("All");
-  const [items, setItems] = useState({ name: "Example", price: 20 });
-
-  const updateItem = (e) => {
-    e.preventDefault();
-    console.log("Update Item");
-    setItems({ ...items, price: items.price + 1 });
-  };
 
   const addItem = (e) => {
     e.preventDefault();
@@ -203,13 +196,6 @@ export default function Order() {
     setItemsOrder(filteredItems);
   };
 
-  // useEffect(() => {
-  //   listOrder.map((data, idx) => {
-  //     setTotalPrice(totalPrice + data.price);
-  //   });
-  // }, [listOrder]);
-
-  console.log("totalPrice =>", totalPrice);
   console.log("listOrder =>", listOrder);
   console.log("itemsOrder", itemsOrder);
 
@@ -226,7 +212,7 @@ export default function Order() {
       <div className="w-[414px] font-sans">
         {/* ============ HEADER ============ */}
         <Header page={page} />
-        <div className="w-full p-3 mt-[51px] mb-[40px] bg-[#FFFFFF] space-y-3">
+        <div className="w-full p-3 mt-[51px] pb-[52px] bg-[#FFFFFF] space-y-3">
           {/* =========== Menus Type ========= */}
           <div className="flex flex-row text-[#878988] space-x-3 overflow-scroll">
             {menusType.map((data, idx) => {
@@ -404,24 +390,6 @@ export default function Order() {
               );
             })}
           </div>
-          <form className="text-black grid grid-cols-6 gap-3">
-            <input
-              type="text"
-              placeholder="Additional custom..."
-              className="rounded-md px-2 py-1 border-0 col-span-2"
-            ></input>
-            <input
-              type="number"
-              placeholder="Price..."
-              className=" border-0 rounded-md px-2 py-1 col-span-2"
-            ></input>
-            <button
-              onClick={updateItem}
-              className="text-white h-[100%] border-0 rounded-md p-1 col-span-2 bg-slate-900"
-            >
-              Add
-            </button>
-          </form>
           <div className="text-[#333736] font-bold">Order List:</div>
           <div className="space-y-3">
             {itemsOrder?.map((data, idx) => {
