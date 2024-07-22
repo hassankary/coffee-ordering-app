@@ -18,7 +18,7 @@ const page = "Order";
 const coffeeMenu = [
   {
     id: 0,
-    type: "coffee",
+    type: 1,
     name: "Espresso",
     price: 16000,
     amount: 0,
@@ -27,7 +27,7 @@ const coffeeMenu = [
   },
   {
     id: 1,
-    type: "coffee",
+    type: 1,
     name: "Ice Americano",
     price: 20000,
     amount: 0,
@@ -36,7 +36,7 @@ const coffeeMenu = [
   },
   {
     id: 2,
-    type: "coffee",
+    type: 1,
     name: "Es Kopi Susu",
     price: 23000,
     amount: 0,
@@ -45,7 +45,7 @@ const coffeeMenu = [
   },
   {
     id: 3,
-    type: "coffee",
+    type: 1,
     name: "Ice Cafe Latte",
     price: 28000,
     amount: 0,
@@ -54,7 +54,7 @@ const coffeeMenu = [
   },
   {
     id: 4,
-    type: "coffee",
+    type: 1,
     name: "Ice Black Lime",
     price: 28000,
     amount: 0,
@@ -63,7 +63,7 @@ const coffeeMenu = [
   },
   {
     id: 5,
-    type: "coffee",
+    type: 1,
     name: "Hot Americano",
     price: 28000,
     amount: 0,
@@ -72,7 +72,7 @@ const coffeeMenu = [
   },
   {
     id: 6,
-    type: "coffee",
+    type: 1,
     name: "Hot Cafe Latte",
     price: 28000,
     amount: 0,
@@ -81,7 +81,7 @@ const coffeeMenu = [
   },
   {
     id: 7,
-    type: "coffee",
+    type: 1,
     name: "Hot Cappucino",
     price: 28000,
     amount: 0,
@@ -90,7 +90,7 @@ const coffeeMenu = [
   },
   {
     id: 8,
-    type: "manual",
+    type: 4,
     name: "V60",
     price: 30000,
     amount: 0,
@@ -99,7 +99,7 @@ const coffeeMenu = [
   },
   {
     id: 9,
-    type: "manual",
+    type: 4,
     name: "Japanese Ice Coffee",
     price: 32000,
     amount: 0,
@@ -108,7 +108,7 @@ const coffeeMenu = [
   },
   {
     id: 10,
-    type: "tea",
+    type: 2,
     name: "Tea",
     price: 20000,
     amount: 0,
@@ -117,7 +117,7 @@ const coffeeMenu = [
   },
   {
     id: 11,
-    type: "tea",
+    type: 2,
     name: "Lemon Tea",
     price: 20000,
     amount: 0,
@@ -126,7 +126,7 @@ const coffeeMenu = [
   },
   {
     id: 12,
-    type: "water",
+    type: 5,
     name: "Mineral Water",
     price: 10000,
     amount: 0,
@@ -135,7 +135,7 @@ const coffeeMenu = [
   },
   {
     id: 13,
-    type: "icecream",
+    type: 3,
     name: "Ice Cream",
     price: 10000,
     amount: 0,
@@ -146,11 +146,11 @@ const coffeeMenu = [
 
 const menusType = [
   "All",
-  "coffee",
-  "tea",
-  "icecream",
-  "manual",
-  "water",
+  "Coffee",
+  "Tea",
+  "Ice Cream",
+  "Manual",
+  "Water",
   "Foods",
 ];
 
@@ -158,7 +158,7 @@ export default function Order() {
   const [itemsOrder, setItemsOrder] = useState(coffeeMenu);
   const [listOrder, setListOrder] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [menuCards, setMenuCards] = useState("All");
+  const [menuCards, setMenuCards] = useState(0);
 
   const addItem = (e) => {
     e.preventDefault();
@@ -204,7 +204,7 @@ export default function Order() {
 
   const tabMenu = (e) => {
     e.preventDefault();
-    setMenuCards(e.target.innerHTML);
+    setMenuCards(e.target.id);
   };
 
   return (
@@ -214,11 +214,12 @@ export default function Order() {
         <Header page={page} />
         <div className="w-full p-3 mt-[51px] pb-[52px] bg-[#FFFFFF] space-y-3">
           {/* =========== Menus Type ========= */}
-          <div className="flex flex-row text-[#878988] space-x-3 overflow-scroll">
+          <div className="flex text-[#878988] space-x-3 overflow-scroll no-scrollbar">
             {menusType.map((data, idx) => {
               return (
                 <button
                   key={idx}
+                  id={idx}
                   className="text-xs px-[14px] py-[10px] hover:text-white hover:bg-[#008C4D] active:bg-[#008C4D] bg-[#F2F1F1] rounded-md transition"
                   onClick={(e) => tabMenu(e)}
                 >
@@ -241,7 +242,7 @@ export default function Order() {
             <div className="grid grid-cols-2 gap-3">
               {/* ===== Order Cards ===== */}
               {itemsOrder.map((data, idx) => {
-                return menuCards == "All" ? (
+                return menuCards == 0 ? (
                   <div
                     key={idx}
                     className="flex flex-col bg-[#FFFFFF] rounded-md shadow-lg"
