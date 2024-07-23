@@ -1,0 +1,130 @@
+{
+  "menu": [
+    {
+      "id": 0,
+      "type": 1,
+      "name": "Espresso",
+      "price": 16000,
+      "amount": 0,
+      "favorite": false,
+      "pic": "/./product/espresso.jpg"
+    },
+    {
+      "id": 1,
+      "type": 1,
+      "name": "Ice Americano",
+      "price": 20000,
+      "amount": 0,
+      "favorite": false,
+      "pic": "/./product/americano.jpg"
+    },
+    {
+      "id": 2,
+      "type": 1,
+      "name": "Es Kopi Susu",
+      "price": 23000,
+      "amount": 0,
+      "favorite": true,
+      "pic": "/./product/eskopisusu.jpeg"
+    },
+    {
+      "id": 3,
+      "type": 1,
+      "name": "Ice Cafe Latte",
+      "price": 28000,
+      "amount": 0,
+      "favorite": true,
+      "pic": "/./product/icelatte.jpg"
+    },
+    {
+      "id": 4,
+      "type": 1,
+      "name": "Ice Black Lime",
+      "price": 28000,
+      "amount": 0,
+      "favorite": true,
+      "pic": "/./product/iceblacklime.jpg"
+    },
+    {
+      "id": 5,
+      "type": 1,
+      "name": "Hot Americano",
+      "price": 28000,
+      "amount": 0,
+      "favorite": false,
+      "pic": "/./product/hotamericano.jpg"
+    },
+    {
+      "id": 6,
+      "type": 1,
+      "name": "Hot Cafe Latte",
+      "price": 28000,
+      "amount": 0,
+      "favorite": false,
+      "pic": "/./product/latte.jpg"
+    },
+    {
+      "id": 7,
+      "type": 1,
+      "name": "Hot Cappucino",
+      "price": 28000,
+      "amount": 0,
+      "favorite": false,
+      "pic": "/./product/cappucino.jpg"
+    },
+    {
+      "id": 8,
+      "type": 4,
+      "name": "V60",
+      "price": 30000,
+      "amount": 0,
+      "favorite": false,
+      "pic": "/./product/v60.jpg"
+    },
+    {
+      "id": 9,
+      "type": 4,
+      "name": "Japanese Ice Coffee",
+      "price": 32000,
+      "amount": 0,
+      "favorite": false,
+      "pic": "/./product/japanese.jpg"
+    },
+    {
+      "id": 10,
+      "type": 2,
+      "name": "Tea",
+      "price": 20000,
+      "amount": 0,
+      "favorite": false,
+      "pic": "/./product/icetea.jpg"
+    },
+    {
+      "id": 11,
+      "type": 2,
+      "name": "Lemon Tea",
+      "price": 20000,
+      "amount": 0,
+      "favorite": true,
+      "pic": "/./product/lemontea.jpg"
+    },
+    {
+      "id": 12,
+      "type": 5,
+      "name": "Mineral Water",
+      "price": 10000,
+      "amount": 0,
+      "favorite": false,
+      "pic": "/./product/mineralwater.jpg"
+    },
+    {
+      "id": 13,
+      "type": 3,
+      "name": "Ice Cream",
+      "price": 10000,
+      "amount": 0,
+      "favorite": true,
+      "pic": "/./product/icecream.jpg"
+    }
+  ]
+}
