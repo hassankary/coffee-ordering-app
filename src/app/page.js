@@ -18,7 +18,7 @@ export default function Home() {
               />
         </div>
         <div className="flex justify-center mt-[90px]">
-          <Link href={"./pages/order"} className="px-3 py-2 bg-[#EAB968] hover:font-bold hover:bg-[#e9ae50] rounded-lg transition">Login</Link>
+          <Link href={"./pages/order"} className="px-3 py-2 bg-[#EAB968] hover:font-bold hover:bg-[#e9ae50] rounded-lg transition-all">Login</Link>
         </div>
       </div>
     </div>
