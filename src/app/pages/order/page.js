@@ -76,7 +76,7 @@ const coffeeMenu = [
     name: "Hot Cafe Latte",
     price: 28000,
     amount: 0,
-    favorite: false,
+    favorite: true,
     pic: "/./product/latte.jpg",
   },
   {
@@ -148,47 +148,47 @@ const menusType = [
   "All",
   "Coffee",
   "Tea",
-  "Ice Cream",
-  "Manual",
+  "Dessert",
+  "Manual Brew",
   "Water",
   "Foods",
 ];
 
 export default function Order() {
   const [itemsOrder, setItemsOrder] = useState(coffeeMenu);
-  const [listOrder, setListOrder] = useState([]);
+  const [dataMenu, setDataMenu] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [menuCards, setMenuCards] = useState(0);
 
-  const addItem = (e) => {
+  const getDataMenu = async () => {
+    const request = await fetch(`http://localhost:4000/menu`);
+    const response = await request.json();
+
+    setDataMenu(response);
+  };
+
+  useEffect(() => {
+    getDataMenu();
+  }, []);
+
+  const plusButtonHandler = (e) => {
     e.preventDefault();
     const filteredItems = itemsOrder.map((data, idx) => {
       if (data.id == e.target.id) {
+        setTotalPrice(totalPrice + data.price);
         return { ...data, amount: data.amount + 1 };
       }
       return data;
     });
 
-    console.log("filteredAddItems ==>", filteredItems);
     setItemsOrder(filteredItems);
-
-    filteredItems.map((data, idx) => {
-      if (data.id == e.target.id && data.amount > 0) {
-        const newObj = data;
-        const newArray = [...listOrder, newObj];
-        setListOrder(newArray);
-        newArray.map((data, idx) => {
-          setTotalPrice(totalPrice + data.price);
-        });
-      }
-      return data;
-    });
   };
 
-  const reduceItem = (e) => {
+  const minusButtonHandler = (e) => {
     e.preventDefault();
     const filteredItems = itemsOrder.map((data, idx) => {
       if (data.id == e.target.id && data.amount > 0) {
+        setTotalPrice(totalPrice - data.price);
         return { ...data, amount: data.amount - 1 };
       }
       return data;
@@ -196,11 +196,7 @@ export default function Order() {
     setItemsOrder(filteredItems);
   };
 
-  console.log("listOrder =>", listOrder);
-  console.log("itemsOrder", itemsOrder);
-
-  const router = useRouter();
-  const orderListDummy = [0, 1, 2, 3, 4, 5, 6];
+  console.log("itemsOrder =>", itemsOrder);
 
   const tabMenu = (e) => {
     e.preventDefault();
@@ -209,34 +205,64 @@ export default function Order() {
 
   return (
     <div className="flex w-full justify-center">
-      <div className="w-[414px] font-sans">
+      <div className="flex max-w-[414px] justify-center font-sans">
         {/* ============ HEADER ============ */}
         <Header page={page} />
         <div className="w-full p-3 mt-[51px] pb-[52px] bg-[#FFFFFF] space-y-3">
           {/* =========== Menus Type ========= */}
-          <div className="flex text-[#878988] space-x-3 overflow-scroll no-scrollbar">
-            {menusType.map((data, idx) => {
-              return (
-                <button
-                  key={idx}
-                  id={idx}
-                  className="text-xs px-[14px] py-[10px] hover:text-white hover:bg-[#008C4D] active:bg-[#008C4D] bg-[#F2F1F1] rounded-md transition"
-                  onClick={(e) => tabMenu(e)}
-                >
-                  {data}
-                </button>
-              );
-            })}
-          </div>
-          {/* ====== FOOTER (Total Price) ===== */}
-          <div className="z-50 flex justify-center fixed left-0 right-0 bottom-0 font-semibold">
-            <div className="w-[414px] p-2 rounded-t-lg bg-green-600 ">
-              <div className="text-center ">
-                Total Rp{" "}
-                {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-              </div>
+          <div className="grid max-h-[36px]">
+            <div className="flex text-[#878988] text-xs font-medium max-h-[36px] space-x-3 overflow-scroll no-scrollbar">
+              {menusType.map((data, idx) => {
+                return (
+                  <button
+                    key={idx}
+                    id={idx}
+                    className={
+                      menuCards == idx
+                        ? "px-[14px] py-[10px] max-h-[36px] whitespace-nowrap text-white bg-[#008C4D] rounded-lg transition-all"
+                        : "px-[14px] py-[10px] max-h-[36px] whitespace-nowrap hover:text-white hover:bg-[#008C4D] active:bg-[#008C4D] bg-[#F2F1F1] rounded-lg transition-all"
+                    }
+                    onClick={(e) => tabMenu(e)}
+                  >
+                    {data}
+                  </button>
+                );
+              })}
             </div>
           </div>
+          {/* ====== FOOTER (Total Price) ===== */}
+          <button className="z-50 flex justify-center fixed left-0 right-0 bottom-0 font-semibold">
+            <span className="w-[414px] p-2 rounded-t-lg bg-green-600 text-center">
+              Total Rp{" "}
+              {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+            </span>
+          </button>
+          {/* <div className="grid gap-2 p-3 fixed w-full max-w-[414px] justify-self-center justify-center left-0 right-0 bottom-0">
+            <button className="z-50 flex justify-center left-0 right-0 bottom-0 font-semibold">
+              <span className="w-[414px] p-2 rounded-t-lg bg-green-600 text-center">
+                Total Rp{" "}
+                {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+              </span>
+            </button>
+            {itemsOrder?.map((data, idx) => {
+              if (data.amount != 0) {
+                const total = data.price * data.amount;
+                return (
+                  <div
+                    key={idx}
+                    className="p-2 grid grid-cols-6 gap-3 rounded-md bg-slate-900 "
+                  >
+                    <div className="col-span-2">{data.name}</div>
+                    <div className="col-span-2">x {data.amount}</div>
+                    <div className="text-center col-span-2">
+                      Rp{" "}
+                      {total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                    </div>
+                  </div>
+                );
+              }
+            })}
+          </div> */}
           {/* ===== Order Section ===== */}
           <div className="z-10 grid grid-cols-1 gap-2 ">
             <div className="grid grid-cols-2 gap-3">
@@ -267,7 +293,7 @@ export default function Order() {
                         unoptimized
                       />
                     </div>
-                    <div className="p-4">
+                    <div className="p-4 font-medium">
                       <h1 className="text-[#333736]">{data.name}</h1>
                       <div className="flex flex-row justify-between">
                         <h1 className="flex text-sm items-center text-[#008C4D]">
@@ -279,7 +305,7 @@ export default function Order() {
                         <div className="flex flex-row space-x-2">
                           <button
                             id={data.id}
-                            onClick={reduceItem}
+                            onClick={minusButtonHandler}
                             className="flex w-[25px] h-[25px] justify-center items-center"
                           >
                             <MinusCircleIcon className=" fill-[#EAB968] hover:fill-[#e4ad54] transition" />
@@ -289,7 +315,7 @@ export default function Order() {
                           </p>
                           <button
                             id={data.id}
-                            onClick={addItem}
+                            onClick={plusButtonHandler}
                             className="flex w-[25px] h-[25px] justify-center items-center rounded-full transition "
                           >
                             <PlusCircleIcon className=" fill-[#EAB968] hover:fill-[#e4ad54] transition" />
@@ -327,7 +353,7 @@ export default function Order() {
                         unoptimized
                       />
                     </div>
-                    <div className="p-4">
+                    <div className="p-4 font-medium">
                       <h1 className="text-[#333736]">{data.name}</h1>
                       <div className="flex flex-row justify-between">
                         <h1 className="flex text-sm items-center text-[#008C4D]">
@@ -339,7 +365,7 @@ export default function Order() {
                         <div className="flex flex-row space-x-2">
                           <button
                             id={data.id}
-                            onClick={reduceItem}
+                            onClick={minusButtonHandler}
                             className="flex w-[25px] h-[25px] justify-center items-center"
                           >
                             <MinusCircleIcon className=" fill-[#EAB968] hover:fill-[#e4ad54] transition" />
@@ -349,7 +375,7 @@ export default function Order() {
                           </p>
                           <button
                             id={data.id}
-                            onClick={addItem}
+                            onClick={plusButtonHandler}
                             className="flex w-[25px] h-[25px] justify-center items-center"
                           >
                             <PlusCircleIcon className=" fill-[#EAB968] hover:fill-[#e4ad54] transition" />
@@ -373,7 +399,7 @@ export default function Order() {
                   <div className="flex justify-between col-span-1 rounded-xl bg-slate-950 text-white">
                     <button
                       id={data.id}
-                      onClick={reduceItem}
+                      onClick={minusButtonHandler}
                       className="px-2 rounded-xl transition bg-red-600 hover:bg-red-500 active:bg-red-400"
                     >
                       -
@@ -381,7 +407,7 @@ export default function Order() {
                     <p>{data.amount}</p>
                     <button
                       id={data.id}
-                      onClick={addItem}
+                      onClick={plusButtonHandler}
                       className="px-2 rounded-xl transition bg-green-600 hover:bg-green-500 active:bg-green-400"
                     >
                       +
