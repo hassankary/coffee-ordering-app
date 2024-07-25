@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import Header from "../../components/header";
 import { TabMenu } from "@/app/components/tabmenu";
 import { MenuCards } from "@/app/components/menucards";
+import { HiOutlineChevronDoubleRight } from "react-icons/hi";
 
 const page = "Order";
 
@@ -29,7 +30,7 @@ const menusType = [
 
 export default function Order() {
   const [itemsOrder, setItemsOrder] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState({amount: 0, length: 0});
   const [menuCards, setMenuCards] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -54,7 +55,7 @@ export default function Order() {
     e.preventDefault();
     const filteredItems = itemsOrder.map((data, idx) => {
       if (data.id == e.target.id) {
-        setTotalPrice(totalPrice + data.price);
+        setTotalPrice({amount: totalPrice.amount + data.price, length: totalPrice.length + 1});
         return { ...data, amount: data.amount + 1 };
       }
       return data;
@@ -67,7 +68,7 @@ export default function Order() {
     e.preventDefault();
     const filteredItems = itemsOrder.map((data, idx) => {
       if (data.id == e.target.id && data.amount > 0) {
-        setTotalPrice(totalPrice - data.price);
+        setTotalPrice({amount: totalPrice.amount - data.price, length: totalPrice.length - 1});
         return { ...data, amount: data.amount - 1 };
       }
       return data;
@@ -92,12 +93,18 @@ export default function Order() {
               onClick={(e) => tabMenu(e)}
             />
             {/* ====== FOOTER (Total Price) ===== */}
-            <button className="z-50 flex justify-center fixed left-0 right-0 bottom-0 font-semibold">
-              <span className="w-[414px] p-2 rounded-t-lg bg-green-600 text-center">
-                Total Rp{" "}
-                {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-              </span>
-            </button>
+            <div className="z-50 flex justify-center fixed left-0 right-0 bottom-0 font-semibold">
+              <button className="w-[414px] flex justify-around items-center p-2 rounded-t-lg bg-green-600 text-center">
+                <span className=" bg-green-500 rounded-full w-6 h-6 duration-400 animate-pulse">{totalPrice.length}</span>
+                <span className="animate-pulse">
+                  Total Rp{" "}
+                  {totalPrice.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                </span>
+                <span className="flex justify-center items-center">
+                  <HiOutlineChevronDoubleRight className="flex w-5 h-5 duration-400 animate-pulse" />
+                </span>
+              </button>
+            </div>
             {/* <div className="grid gap-2 p-3 fixed w-full max-w-[414px] justify-self-center justify-center left-0 right-0 bottom-0">
             <button className="z-50 flex justify-center left-0 right-0 bottom-0 font-semibold">
               <span className="w-[414px] p-2 rounded-t-lg bg-green-600 text-center">
