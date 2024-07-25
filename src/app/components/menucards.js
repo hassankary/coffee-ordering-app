@@ -1,16 +1,29 @@
 "use client";
-
-import { HeartIcon, MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/24/solid";
+import {
+  HeartIcon,
+  MinusCircleIcon,
+  PlusCircleIcon,
+} from "@heroicons/react/24/solid";
 import Image from "next/image";
+import { HiOutlineMinus, HiOutlinePlus } from "react-icons/hi";
 
-export const MenuCards = ({key, onClickMinus, onClickPlus, id, dataFavorite, src, dataPrice, dataName, dataAmount}) => {
+export const MenuCards = ({
+  onClickMinus,
+  onClickPlus,
+  id,
+  dataFavorite,
+  src,
+  dataPrice,
+  dataName,
+  dataAmount,
+}) => {
   return (
-    <div key={key} className="flex flex-col bg-[#FFFFFF] rounded-md shadow-lg">
-      <div
-        className={{dataFavorite} ? "z-10 p-2 -mb-10" : "hidden z-10 p-2 -mb-10"}
-      >
-        <HeartIcon className="float-right w-6 h-6 fill-red-600" />
-      </div>
+    <div className="flex flex-col bg-[#FFFFFF] rounded-md shadow-lg">
+      {dataFavorite && (
+        <div className="z-10 p-2 -mb-10">
+          <HeartIcon className="float-right w-6 h-6 fill-red-600" />
+        </div>
+      )}
       <div>
         <Image
           className="rounded-t-xl"
@@ -32,19 +45,17 @@ export const MenuCards = ({key, onClickMinus, onClickPlus, id, dataFavorite, src
             <button
               id={id}
               onClick={onClickMinus}
-              className="flex w-[25px] h-[25px] fill-[#EAB968] justify-center items-center"
+              className="flex w-[25px] h-[25px] bg-[#EAB968] justify-center items-center rounded-full transition"
             >
-              <MinusCircleIcon className=" fill-[#EAB968] hover:fill-[#e4ad54] transition" />
+              <HiOutlineMinus />
             </button>
-            <p className="flex text-sm text-black items-center">
-              {dataAmount}
-            </p>
+            <p className="flex text-sm text-black items-center">{dataAmount}</p>
             <button
               id={id}
               onClick={onClickPlus}
-              className="flex w-[25px] h-[25px] fill-[#EAB968] justify-center items-center rounded-full transition "
+              className="flex w-[25px] h-[25px] bg-[#EAB968] justify-center items-center rounded-full transition"
             >
-              <PlusCircleIcon className=" fill-[#EAB968] hover:fill-[#e4ad54] transition" />
+              <HiOutlinePlus />
             </button>
           </div>
         </div>
