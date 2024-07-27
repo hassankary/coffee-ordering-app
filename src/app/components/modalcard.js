@@ -2,7 +2,7 @@
 import { Modal } from "flowbite-react";
 import Image from "next/image";
 
-export const ModalCard = ({detailModal, show, onClose, onClick}) => {
+export const ModalCard = ({ detailModal, show, onClose, onClick }) => {
   return (
     <Modal
       className="flex bottom-0 right-0 top-0 left-0 pt-[110px] pb-[180px]"
@@ -25,10 +25,7 @@ export const ModalCard = ({detailModal, show, onClose, onClick}) => {
             />
             <div className="flex-col text-black font-semibold space-y-2">
               <div className=" text-lg">{detailModal?.name}</div>
-              <div className="font-normal">
-                {detailModal?.name} + Water + Description + Description +
-                Description
-              </div>
+              <div className="font-normal">{detailModal?.description}</div>
               <div className=" text-green-500">
                 Rp.{" "}
                 {detailModal?.price
