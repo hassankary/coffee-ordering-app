@@ -102,7 +102,13 @@ export default function Order() {
             page={$Page[currentPage]}
             onClickOrder={() => setCurrentPage(0)}
             onClickFavorite={() => setCurrentPage(1)}
-            onClickCart={() => setCurrentPage(2)}
+            onClickCart={() => {
+              setCurrentPage(2);
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            }}
           />
           {/* ====== FOOTER (Total Price) ===== */}
           <Footer
@@ -318,7 +324,12 @@ export default function Order() {
                 </div>
               </div>
             </div> */}
-            <ModalCard detailModal={detailModal} show={openModal} onClick={() => setOpenModal(false)} onClose={() => setOpenModal(false)}/>
+            <ModalCard
+              detailModal={detailModal}
+              show={openModal}
+              onClick={() => setOpenModal(false)}
+              onClose={() => setOpenModal(false)}
+            />
           </div>
         </div>
       </div>
