@@ -31,27 +31,27 @@ export const MenuCards = ({
       </div>
       <div className="p-4 font-medium">
         <h1 className="text-[#333736]">{data.name}</h1>
-        <div className="flex flex-row flex-wrap justify-between">
+        <div className="flex flex-row flex-wrap justify-between items-center">
           <h1 className="flex text-sm items-center text-[#008C4D]">
             Rp {data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
           </h1>
-          <div className="flex flex-row space-x-1.5">
+          <div className=" w-[70px] flex flex-row justify-between">
             <button
               id={data.id}
-              onClick={onClickMinus}
+              onClick={(e) => onClickMinus(e, data?.id)}
               className="flex w-[25px] h-[25px] bg-[#EAB968] justify-center items-center rounded-full transition"
             >
-              <HiOutlineMinus />
+              <HiOutlineMinus/>
             </button>
-            <p className="flex text-sm text-black items-center">
+            <p className="flex text-sm text-black justify-center items-center">
               {data.amount}
             </p>
             <button
               id={data.id}
-              onClick={onClickPlus}
+              onClick={(e) => onClickPlus(e, data?.id)}
               className="flex w-[25px] h-[25px] bg-[#EAB968] justify-center items-center rounded-full transition"
             >
-              <HiOutlinePlus />
+              <HiOutlinePlus/>
             </button>
           </div>
         </div>

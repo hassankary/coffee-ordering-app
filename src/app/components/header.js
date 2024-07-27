@@ -36,7 +36,7 @@ export default function Header({
   ];
 
   return (
-    <div className="z-50 fixed w-full max-w-[414px] h-[52px] grid grid-cols-3 px-3 py-3 justify-between text-[#333736] text-lg font-semibold bg-[#FFFFFF] shadow-sm">
+    <div className="z-50 top-0 fixed w-full max-w-[414px] h-[52px] grid grid-cols-3 px-3 py-3 justify-between text-[#333736] text-lg font-semibold bg-[#FFFFFF] shadow-sm">
       <div className="flex items-center ">
         {page == "Order" ? (
           <Dropdown

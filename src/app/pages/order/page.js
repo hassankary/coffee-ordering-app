@@ -7,6 +7,7 @@ import { MenuCards } from "@/app/components/menucards";
 import { Button, Modal, Spinner } from "flowbite-react";
 import { Footer } from "@/app/components/footer";
 import { ModalCard } from "@/app/components/modalcard";
+import { HiOutlineMinus, HiOutlinePlus, HiTrash } from "react-icons/hi";
 
 const menusType = [
   "All",
@@ -47,9 +48,18 @@ export default function Order() {
     setMenuCards(e.target.id);
   };
 
-  const plusButtonHandler = (e) => {
+  const plusButtonHandler = (e, idButton = null) => {
     e.preventDefault();
     const filteredItems = itemsOrder.map((data, idx) => {
+      if (idButton) {
+        if (data.id == idButton) {
+          setTotalPrice({
+            amount: totalPrice.amount + data.price,
+            length: totalPrice.length + 1,
+          });
+          return { ...data, amount: data.amount + 1 };
+        }
+      }
       if (data.id == e.target.id) {
         setTotalPrice({
           amount: totalPrice.amount + data.price,
@@ -63,15 +73,44 @@ export default function Order() {
     setItemsOrder(filteredItems);
   };
 
-  const minusButtonHandler = (e) => {
+  const minusButtonHandler = (e, idButton = null) => {
     e.preventDefault();
+    console.log("e minus =>", e);
     const filteredItems = itemsOrder.map((data, idx) => {
+      if (idButton) {
+        if (data.id == idButton && data.amount > 0) {
+          setTotalPrice({
+            amount: totalPrice.amount - data.price,
+            length: totalPrice.length - 1,
+          });
+          return { ...data, amount: data.amount - 1 };
+        }
+      }
       if (data.id == e.target.id && data.amount > 0) {
         setTotalPrice({
           amount: totalPrice.amount - data.price,
           length: totalPrice.length - 1,
         });
         return { ...data, amount: data.amount - 1 };
+      }
+      return data;
+    });
+    setItemsOrder(filteredItems);
+  };
+
+  const deleteItemHandler = (e, idButton = null) => {
+    e.preventDefault();
+    console.log("e minus =>", e);
+    const filteredItems = itemsOrder.map((data, idx) => {
+      if (idButton) {
+        if (data.id == idButton && data.amount > 0) {
+          const dataPrice = data.amount * data.price;
+          setTotalPrice({
+            amount: totalPrice.amount - dataPrice,
+            length: totalPrice.length - data.amount,
+          });
+          return { ...data, amount: data.amount - data.amount };
+        }
       }
       return data;
     });
@@ -122,28 +161,8 @@ export default function Order() {
             }}
           />
           <div className="w-screen min-h-screen p-3 mt-[51px] pb-[52px] bg-[#FFFFFF]">
-            {/* ========== SPA TEST ========= */}
+            {/* ========== SPA Render Components ========= */}
             <div className="tokay w-full max-w-[414px] min-h-screen space-y-3">
-              {/* <div className="grid overflow-hidden max-h-[36px]">
-                <div className="flex text-[#878988] text-xs font-medium max-h-[36px] space-x-3 overflow-scroll no-scrollbar">
-                  {$Page.map((data, idx) => {
-                    return (
-                      <button
-                        key={idx}
-                        id={idx}
-                        className={
-                          menuCards == idx
-                            ? "px-[14px] py-[10px] max-h-[36px] whitespace-nowrap text-white bg-[#008C4D] rounded-lg transition-all"
-                            : "px-[14px] py-[10px] max-h-[36px] whitespace-nowrap hover:text-white hover:bg-[#008C4D] active:bg-[#008C4D] bg-[#F2F1F1] rounded-lg transition-all"
-                        }
-                        onClick={(e) => currentPageHandler(e)}
-                      >
-                        {data}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div> */}
               {currentPage == 0 ? (
                 <>
                   <TabMenu
@@ -184,7 +203,7 @@ export default function Order() {
                         );
                       })}
                     </div>
-                    {itemsOrder?.map((data, idx) => {
+                    {/* {itemsOrder?.map((data, idx) => {
                       return (
                         <div
                           key={idx}
@@ -212,7 +231,7 @@ export default function Order() {
                           </div>
                         </div>
                       );
-                    })}
+                    })} */}
                   </div>
                 </>
               ) : currentPage == 1 ? (
@@ -240,9 +259,9 @@ export default function Order() {
                       return (
                         <div
                           key={idx}
-                          className="flex w-full justify-between p-2 bg-[#FFFFFF] text-black border-b "
+                          className="flex w-full justify-between p-2 bg-[#FFFFFF] text-black border-b space-x-3"
                         >
-                          <div className="flex flex-col justify-between">
+                          <div className="flex flex-auto flex-col justify-between">
                             <div className="flex font-semibold">
                               {data.name}
                             </div>
@@ -255,20 +274,20 @@ export default function Order() {
                             <div className="flex w-[80px] justify-between col-span-1 rounded-xl bg-transparent text-white">
                               <button
                                 id={data.id}
-                                onClick={minusButtonHandler}
-                                className="px-2 rounded-xl transition bg-red-600 hover:bg-red-500 active:bg-red-400"
+                                onClick={(e) => minusButtonHandler(e, data.id)}
+                                className="flex w-[25px] h-[25px] justify-center items-center rounded-full transition bg-red-600 hover:bg-red-500 active:bg-red-400"
                               >
-                                -
+                                <HiOutlineMinus />
                               </button>
                               <p className="text-black font-medium">
                                 {data.amount}
                               </p>
                               <button
                                 id={data.id}
-                                onClick={plusButtonHandler}
-                                className="px-2 rounded-xl transition bg-green-600 hover:bg-green-500 active:bg-green-400"
+                                onClick={(e) => plusButtonHandler(e, data.id)}
+                                className="flex w-[25px] h-[25px] justify-center items-center rounded-full transition bg-green-600 hover:bg-green-500 active:bg-green-400"
                               >
-                                +
+                                <HiOutlinePlus />
                               </button>
                             </div>
                           </div>
@@ -285,6 +304,14 @@ export default function Order() {
                               unoptimized
                             />
                           </div>
+                          <div className="flex flex-none justify-center items-center">
+                            <button
+                              onClick={(e) => deleteItemHandler(e, data.id)}
+                              className="flex p-1 -mr-2 justify-center items-center rounded-xl transition text-white bg-red-600 hover:bg-red-500 active:bg-red-400"
+                            >
+                              <HiTrash/>
+                            </button>
+                          </div>
                         </div>
                       );
                     }
@@ -295,35 +322,6 @@ export default function Order() {
               )}
             </div>
             {/* ======= MODAL ======= */}
-            {/* <div className="fixed z-50 flex justify-center items-center top-0 left-0 right-0 bottom-0 bg-slate-700 bg-opacity-80">
-              <div className="flex w-full max-w-[414px] px-5  justify-center bg-transparent">
-                <div className="flex w-full max-w-[414px] p-6 justify-center rounded-2xl bg-slate-50">
-                  <div className="flex-col space-y-5">
-                    <Image
-                      className="rounded-2xl"
-                      src={"/./product/americano.jpg"}
-                      width={330}
-                      height={330}
-                      alt="product image"
-                      quality={100}
-                      unoptimized
-                    />
-                    <div className="flex-col text-black font-semibold space-y-2">
-                      <div className="">Americano</div>
-                      <div className="font-normal">
-                        Espresso + Ice + Water
-                      </div>
-                      <div className=" text-green-500">50.000</div>
-                      <div className="flex justify-center">
-                        <button className="px-5 py-3 bg-red-600 text-white rounded-xl">
-                          Close
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> */}
             <ModalCard
               detailModal={detailModal}
               show={openModal}
