@@ -16,6 +16,7 @@ export default function Home() {
               alt="coffee company logo"
               quality={100}
               unoptimized
+              priority
             />
           </div>
           <div className="flex justify-center mt-[90px]">
