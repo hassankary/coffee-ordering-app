@@ -1,11 +1,12 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "../../components/header";
 import { TabMenu } from "@/app/components/tabmenu";
 import { MenuCards } from "@/app/components/menucards";
-import { Spinner } from "flowbite-react";
+import { Button, Modal, Spinner } from "flowbite-react";
 import { Footer } from "@/app/components/footer";
+import { ModalCard } from "@/app/components/modalcard";
 
 const menusType = [
   "All",
@@ -25,6 +26,9 @@ export default function Order() {
   const [currentPage, setCurrentPage] = useState(0);
   const [menuCards, setMenuCards] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [detailModal, setDetailModal] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+  const modalRef = useRef();
 
   const getDataMenu = async () => {
     const request = await fetch(`http://localhost:4000/menu`);
@@ -74,7 +78,19 @@ export default function Order() {
     setItemsOrder(filteredItems);
   };
 
+  const showModal = (e) => {
+    e.preventDefault();
+    console.log("masuk data modal =>", e.target.id);
+    setOpenModal(true);
+    itemsOrder.map((data, idx) => {
+      if (data.id == e.target.id) {
+        setDetailModal(data);
+      }
+    });
+  };
+
   console.log("itemsOrder =>", itemsOrder);
+  console.log("detailModal =>", detailModal);
 
   return (
     <>
@@ -99,7 +115,7 @@ export default function Order() {
               });
             }}
           />
-          <div className="w-screen min-h-screen p-3 mt-[51px] pb-[52px] bg-[#FFFFFF] space-y-3">
+          <div className="w-screen min-h-screen p-3 mt-[51px] pb-[52px] bg-[#FFFFFF]">
             {/* ========== SPA TEST ========= */}
             <div className="tokay w-full max-w-[414px] min-h-screen space-y-3">
               {/* <div className="grid overflow-hidden max-h-[36px]">
@@ -145,12 +161,14 @@ export default function Order() {
                       {itemsOrder?.map((data, idx) => {
                         return menuCards == 0 ? (
                           <MenuCards
+                            onClickModal={showModal}
                             data={data}
                             onClickMinus={minusButtonHandler}
                             onClickPlus={plusButtonHandler}
                           />
                         ) : menuCards == data.type ? (
                           <MenuCards
+                            onClickModal={showModal}
                             data={data}
                             onClickMinus={minusButtonHandler}
                             onClickPlus={plusButtonHandler}
@@ -198,6 +216,7 @@ export default function Order() {
                       <>
                         {data.favorite && (
                           <MenuCards
+                            onClickModal={showModal}
                             data={data}
                             onClickMinus={minusButtonHandler}
                             onClickPlus={plusButtonHandler}
@@ -208,14 +227,14 @@ export default function Order() {
                   })}
                 </div>
               ) : currentPage == 2 ? (
-                <div className="flex flex-col space-y-3">
+                <div className="flex flex-col">
                   {itemsOrder?.map((data, idx) => {
                     if (data.amount != 0) {
                       const total = data.price * data.amount;
                       return (
                         <div
                           key={idx}
-                          className="flex w-full justify-between p-2 gap-3 rounded-2xl bg-slate-200 text-black"
+                          className="flex w-full justify-between p-2 bg-[#FFFFFF] text-black border-b "
                         >
                           <div className="flex flex-col justify-between">
                             <div className="flex font-semibold">
@@ -249,6 +268,8 @@ export default function Order() {
                           </div>
                           <div className="flex justify-center">
                             <Image
+                              id={data.id}
+                              onClick={showModal}
                               className="rounded-xl "
                               src={data.pic}
                               width={80}
@@ -267,6 +288,37 @@ export default function Order() {
                 ""
               )}
             </div>
+            {/* ======= MODAL ======= */}
+            {/* <div className="fixed z-50 flex justify-center items-center top-0 left-0 right-0 bottom-0 bg-slate-700 bg-opacity-80">
+              <div className="flex w-full max-w-[414px] px-5  justify-center bg-transparent">
+                <div className="flex w-full max-w-[414px] p-6 justify-center rounded-2xl bg-slate-50">
+                  <div className="flex-col space-y-5">
+                    <Image
+                      className="rounded-2xl"
+                      src={"/./product/americano.jpg"}
+                      width={330}
+                      height={330}
+                      alt="product image"
+                      quality={100}
+                      unoptimized
+                    />
+                    <div className="flex-col text-black font-semibold space-y-2">
+                      <div className="">Americano</div>
+                      <div className="font-normal">
+                        Espresso + Ice + Water
+                      </div>
+                      <div className=" text-green-500">50.000</div>
+                      <div className="flex justify-center">
+                        <button className="px-5 py-3 bg-red-600 text-white rounded-xl">
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> */}
+            <ModalCard detailModal={detailModal} show={openModal} onClick={() => setOpenModal(false)} onClose={() => setOpenModal(false)}/>
           </div>
         </div>
       </div>

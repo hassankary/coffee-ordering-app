@@ -1,14 +1,13 @@
 "use client";
-import {
-  HeartIcon,
-} from "@heroicons/react/24/solid";
+import { HeartIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { HiOutlineMinus, HiOutlinePlus } from "react-icons/hi";
 
 export const MenuCards = ({
+  onClickModal,
   onClickMinus,
   onClickPlus,
-  data
+  data,
 }) => {
   return (
     <div className="flex flex-col bg-[#FFFFFF] rounded-xl shadow-lg">
@@ -19,6 +18,8 @@ export const MenuCards = ({
       )}
       <div>
         <Image
+          id={data.id}
+          onClick={onClickModal}
           className="rounded-t-xl"
           src={data.pic}
           width={200}
@@ -42,7 +43,9 @@ export const MenuCards = ({
             >
               <HiOutlineMinus />
             </button>
-            <p className="flex text-sm text-black items-center">{data.amount}</p>
+            <p className="flex text-sm text-black items-center">
+              {data.amount}
+            </p>
             <button
               id={data.id}
               onClick={onClickPlus}
