@@ -1,8 +1,6 @@
 "use client";
 import {
   HeartIcon,
-  MinusCircleIcon,
-  PlusCircleIcon,
 } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { HiOutlineMinus, HiOutlinePlus } from "react-icons/hi";
@@ -10,16 +8,11 @@ import { HiOutlineMinus, HiOutlinePlus } from "react-icons/hi";
 export const MenuCards = ({
   onClickMinus,
   onClickPlus,
-  id,
-  dataFavorite,
-  src,
-  dataPrice,
-  dataName,
-  dataAmount,
+  data
 }) => {
   return (
-    <div className="flex flex-col bg-[#FFFFFF] rounded-md shadow-lg">
-      {dataFavorite && (
+    <div className="flex flex-col bg-[#FFFFFF] rounded-xl shadow-lg">
+      {data.favorite && (
         <div className="z-10 p-2 -mb-10">
           <HeartIcon className="float-right w-6 h-6 fill-red-600" />
         </div>
@@ -27,7 +20,7 @@ export const MenuCards = ({
       <div>
         <Image
           className="rounded-t-xl"
-          src={src}
+          src={data.pic}
           width={200}
           height={200}
           alt="product image"
@@ -36,22 +29,22 @@ export const MenuCards = ({
         />
       </div>
       <div className="p-4 font-medium">
-        <h1 className="text-[#333736]">{dataName}</h1>
-        <div className="flex flex-row justify-between">
+        <h1 className="text-[#333736]">{data.name}</h1>
+        <div className="flex flex-row flex-wrap justify-between">
           <h1 className="flex text-sm items-center text-[#008C4D]">
-            Rp {dataPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+            Rp {data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
           </h1>
-          <div className="flex flex-row space-x-2">
+          <div className="flex flex-row space-x-1.5">
             <button
-              id={id}
+              id={data.id}
               onClick={onClickMinus}
               className="flex w-[25px] h-[25px] bg-[#EAB968] justify-center items-center rounded-full transition"
             >
               <HiOutlineMinus />
             </button>
-            <p className="flex text-sm text-black items-center">{dataAmount}</p>
+            <p className="flex text-sm text-black items-center">{data.amount}</p>
             <button
-              id={id}
+              id={data.id}
               onClick={onClickPlus}
               className="flex w-[25px] h-[25px] bg-[#EAB968] justify-center items-center rounded-full transition"
             >
