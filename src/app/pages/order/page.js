@@ -8,6 +8,7 @@ import { Button, Modal, Spinner } from "flowbite-react";
 import { Footer } from "@/app/components/footer";
 import { ModalCard } from "@/app/components/modalcard";
 import { HiOutlineMinus, HiOutlinePlus, HiTrash } from "react-icons/hi";
+import { PaymentCard } from "@/app/components/paymentcard";
 
 const menusType = [
   "All",
@@ -32,7 +33,8 @@ export default function Order() {
   const modalRef = useRef();
 
   const getDataMenu = async () => {
-    const request = await fetch(`http://localhost:4000/menu`);
+    const request = await fetch(`https://mock-server-teal.vercel.app/menu`);
+    // const request = await fetch(`http://localhost:4000/menu`);
     const response = await request.json();
 
     setItemsOrder(response);
@@ -50,9 +52,12 @@ export default function Order() {
 
   const plusButtonHandler = (e, idButton = null) => {
     e.preventDefault();
-    const filteredItems = itemsOrder.map((data, idx) => {
+    const filteredItems = itemsOrder?.map((data, idx) => {
+      // console.log("e ===>", e);
       if (idButton) {
-        if (data.id == idButton) {
+        if (data.id === idButton) {
+          console.log("====> masuk buttonId");
+
           setTotalPrice({
             amount: totalPrice.amount + data.price,
             length: totalPrice.length + 1,
@@ -60,7 +65,8 @@ export default function Order() {
           return { ...data, amount: data.amount + 1 };
         }
       }
-      if (data.id == e.target.id) {
+      if (data.id === e.target.id) {
+        console.log("masuk id");
         setTotalPrice({
           amount: totalPrice.amount + data.price,
           length: totalPrice.length + 1,
@@ -69,24 +75,27 @@ export default function Order() {
       }
       return data;
     });
-
     setItemsOrder(filteredItems);
   };
 
   const minusButtonHandler = (e, idButton = null) => {
     e.preventDefault();
-    console.log("e minus =>", e);
-    const filteredItems = itemsOrder.map((data, idx) => {
+    const filteredItems = itemsOrder?.map((data, idx) => {
       if (idButton) {
-        if (data.id == idButton && data.amount > 0) {
+        if (data.id === idButton && data.amount > 0) {
+          console.log("====> masuk buttonId");
           setTotalPrice({
             amount: totalPrice.amount - data.price,
             length: totalPrice.length - 1,
           });
+          if (totalPrice.length === 1 && currentPage === 2) {
+            setCurrentPage(0);
+          }
           return { ...data, amount: data.amount - 1 };
         }
       }
-      if (data.id == e.target.id && data.amount > 0) {
+      if (data.id === e.target.id && data.amount > 0) {
+        console.log("masuk id");
         setTotalPrice({
           amount: totalPrice.amount - data.price,
           length: totalPrice.length - 1,
@@ -101,7 +110,7 @@ export default function Order() {
   const deleteItemHandler = (e, idButton = null) => {
     e.preventDefault();
     console.log("e minus =>", e);
-    const filteredItems = itemsOrder.map((data, idx) => {
+    const filteredItems = itemsOrder?.map((data, idx) => {
       if (idButton) {
         if (data.id == idButton && data.amount > 0) {
           const dataPrice = data.amount * data.price;
@@ -109,6 +118,9 @@ export default function Order() {
             amount: totalPrice.amount - dataPrice,
             length: totalPrice.length - data.amount,
           });
+          if (totalPrice.length === data.amount) {
+            setCurrentPage(0);
+          }
           return { ...data, amount: data.amount - data.amount };
         }
       }
@@ -128,8 +140,8 @@ export default function Order() {
     });
   };
 
-  console.log("itemsOrder =>", itemsOrder);
-  console.log("detailModal =>", detailModal);
+  // console.log("itemsOrder =>", itemsOrder);
+  // console.log("detailModal =>", detailModal);
 
   return (
     <>
@@ -150,16 +162,19 @@ export default function Order() {
             }}
           />
           {/* ====== FOOTER (Total Price) ===== */}
-          <Footer
-            totalPrice={totalPrice}
-            onClick={() => {
-              setCurrentPage(2);
-              window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-              });
-            }}
-          />
+          {totalPrice.length !== 0 && (
+            <Footer
+              page={currentPage}
+              totalPrice={totalPrice}
+              onClick={() => {
+                setCurrentPage(2);
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
+              }}
+            />
+          )}
           <div className="w-screen min-h-screen p-3 mt-[51px] pb-[52px] bg-[#FFFFFF]">
             {/* ========== SPA Render Components ========= */}
             <div className="tokay w-full max-w-[414px] min-h-screen space-y-3">
@@ -191,7 +206,7 @@ export default function Order() {
                             onClickMinus={minusButtonHandler}
                             onClickPlus={plusButtonHandler}
                           />
-                        ) : menuCards == data.type ? (
+                        ) : menuCards == data?.type ? (
                           <MenuCards
                             onClickModal={showModal}
                             data={data}
@@ -236,7 +251,7 @@ export default function Order() {
                 </>
               ) : currentPage == 1 ? (
                 <div className="grid grid-cols-2 gap-3">
-                  {itemsOrder.map((data, idx) => {
+                  {itemsOrder?.map((data, idx) => {
                     return (
                       <>
                         {data.favorite && (
@@ -252,70 +267,107 @@ export default function Order() {
                   })}
                 </div>
               ) : currentPage == 2 ? (
-                <div className="flex flex-col">
-                  {itemsOrder?.map((data, idx) => {
-                    if (data.amount != 0) {
-                      const total = data.price * data.amount;
-                      return (
-                        <div
-                          key={idx}
-                          className="flex w-full justify-between p-2 bg-[#FFFFFF] text-black border-b space-x-3"
-                        >
-                          <div className="flex flex-auto flex-col justify-between">
-                            <div className="flex font-semibold">
-                              {data.name}
-                            </div>
-                            <div className="flex ">
-                              Rp{" "}
-                              {total
-                                .toString()
-                                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                            </div>
-                            <div className="flex w-[80px] justify-between col-span-1 rounded-xl bg-transparent text-white">
-                              <button
-                                id={data.id}
-                                onClick={(e) => minusButtonHandler(e, data.id)}
-                                className="flex w-[25px] h-[25px] justify-center items-center rounded-full transition bg-red-600 hover:bg-red-500 active:bg-red-400"
+                <div className="flex flex-col space-y-4">
+                  <div className="flex flex-col space-y-4">
+                    {totalPrice?.amount !== 0 ? (
+                      <>
+                        {itemsOrder?.map((data, idx) => {
+                          if (data.amount != 0) {
+                            const total = data.price * data.amount;
+                            return (
+                              <div
+                                key={idx}
+                                className="flex w-full justify-between p-2 bg-[#FFFFFF] text-black border-b space-x-3"
                               >
-                                <HiOutlineMinus />
-                              </button>
-                              <p className="text-black font-medium">
-                                {data.amount}
-                              </p>
-                              <button
-                                id={data.id}
-                                onClick={(e) => plusButtonHandler(e, data.id)}
-                                className="flex w-[25px] h-[25px] justify-center items-center rounded-full transition bg-green-600 hover:bg-green-500 active:bg-green-400"
-                              >
-                                <HiOutlinePlus />
-                              </button>
-                            </div>
+                                <div className="flex flex-auto flex-col justify-between">
+                                  <div className="flex font-semibold">
+                                    {data.name}
+                                  </div>
+                                  <div className="flex ">
+                                    Rp{" "}
+                                    {total
+                                      .toString()
+                                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                                  </div>
+                                  <div className="flex w-[80px] justify-between col-span-1 rounded-xl bg-transparent text-white">
+                                    <button
+                                      id={data.id}
+                                      onClick={(e) =>
+                                        minusButtonHandler(e, data.id)
+                                      }
+                                      className="flex w-[25px] h-[25px] justify-center items-center rounded-full transition bg-red-600 hover:bg-red-500 active:bg-red-400"
+                                    >
+                                      <HiOutlineMinus />
+                                    </button>
+                                    <p className="text-black font-medium">
+                                      {data.amount}
+                                    </p>
+                                    <button
+                                      id={data.id}
+                                      onClick={(e) =>
+                                        plusButtonHandler(e, data.id)
+                                      }
+                                      className="flex w-[25px] h-[25px] justify-center items-center rounded-full transition bg-green-600 hover:bg-green-500 active:bg-green-400"
+                                    >
+                                      <HiOutlinePlus />
+                                    </button>
+                                  </div>
+                                </div>
+                                <div className="flex justify-center">
+                                  <Image
+                                    id={data.id}
+                                    onClick={showModal}
+                                    className="rounded-xl "
+                                    src={data.pic}
+                                    width={80}
+                                    height={80}
+                                    alt="product image"
+                                    quality={100}
+                                    unoptimized
+                                  />
+                                </div>
+                                <div className="flex flex-none justify-center items-center">
+                                  <button
+                                    onClick={(e) =>
+                                      deleteItemHandler(e, data.id)
+                                    }
+                                    className="flex p-1 -mr-2 justify-center items-center rounded-xl transition text-white bg-red-600 hover:bg-red-500 active:bg-red-400"
+                                  >
+                                    <HiTrash />
+                                  </button>
+                                </div>
+                              </div>
+                            );
+                          }
+                        })}
+                        <div className="flex px-2 py-3 text-black border-t border-b justify-between">
+                          <div className="flex flex-col">
+                            <h1 className=" font-semibold">
+                              Ada lagi yang mau dibeli?
+                            </h1>
+                            <h1>bisa nambah menu lain ya...</h1>
                           </div>
-                          <div className="flex justify-center">
-                            <Image
-                              id={data.id}
-                              onClick={showModal}
-                              className="rounded-xl "
-                              src={data.pic}
-                              width={80}
-                              height={80}
-                              alt="product image"
-                              quality={100}
-                              unoptimized
-                            />
-                          </div>
-                          <div className="flex flex-none justify-center items-center">
+                          <div className="flex items-center px-3">
                             <button
-                              onClick={(e) => deleteItemHandler(e, data.id)}
-                              className="flex p-1 -mr-2 justify-center items-center rounded-xl transition text-white bg-red-600 hover:bg-red-500 active:bg-red-400"
+                              onClick={() => {
+                                setCurrentPage(0);
+                                window.scrollTo({
+                                  top: 0,
+                                  behavior: "smooth",
+                                });
+                              }}
+                              className="px-4 py-2 text-white font-semibold bg-green-700 rounded-xl"
                             >
-                              <HiTrash/>
+                              Tambah
                             </button>
                           </div>
                         </div>
-                      );
-                    }
-                  })}
+                      </>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <PaymentCard totalPrice={totalPrice} />
                 </div>
               ) : (
                 ""
