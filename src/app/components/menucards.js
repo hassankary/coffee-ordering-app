@@ -11,17 +11,17 @@ export const MenuCards = ({
 }) => {
   return (
     <div className="flex flex-col bg-[#FFFFFF] rounded-xl shadow-lg">
-      {data.favorite && (
+      {data?.favorite && (
         <div className="z-10 p-2 -mb-10">
           <HeartIcon className="float-right w-6 h-6 fill-red-600" />
         </div>
       )}
       <div>
         <Image
-          id={data.id}
+          id={data?.id}
           onClick={onClickModal}
           className="rounded-t-xl"
-          src={data.pic}
+          src={data?.pic}
           width={200}
           height={200}
           alt="product image"
@@ -30,24 +30,24 @@ export const MenuCards = ({
         />
       </div>
       <div className="p-4 font-medium">
-        <h1 className="text-[#333736]">{data.name}</h1>
+        <h1 className="text-[#333736]">{data?.name}</h1>
         <div className="flex flex-row flex-wrap justify-between items-center">
           <h1 className="flex text-sm items-center text-[#008C4D]">
-            Rp {data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+            Rp {data?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
           </h1>
           <div className=" w-[70px] flex flex-row justify-between">
             <button
-              id={data.id}
+              id={data?.id}
               onClick={(e) => onClickMinus(e, data?.id)}
               className="flex w-[25px] h-[25px] bg-[#EAB968] justify-center items-center rounded-full transition"
             >
               <HiOutlineMinus/>
             </button>
             <p className="flex text-sm text-black justify-center items-center">
-              {data.amount}
+              {data?.amount}
             </p>
             <button
-              id={data.id}
+              id={data?.id}
               onClick={(e) => onClickPlus(e, data?.id)}
               className="flex w-[25px] h-[25px] bg-[#EAB968] justify-center items-center rounded-full transition"
             >

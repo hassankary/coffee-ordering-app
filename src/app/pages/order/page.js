@@ -53,11 +53,8 @@ export default function Order() {
   const plusButtonHandler = (e, idButton = null) => {
     e.preventDefault();
     const filteredItems = itemsOrder?.map((data, idx) => {
-      // console.log("e ===>", e);
       if (idButton) {
         if (data.id === idButton) {
-          console.log("====> masuk buttonId");
-
           setTotalPrice({
             amount: totalPrice.amount + data.price,
             length: totalPrice.length + 1,
@@ -66,7 +63,6 @@ export default function Order() {
         }
       }
       if (data.id === e.target.id) {
-        console.log("masuk id");
         setTotalPrice({
           amount: totalPrice.amount + data.price,
           length: totalPrice.length + 1,
@@ -83,7 +79,6 @@ export default function Order() {
     const filteredItems = itemsOrder?.map((data, idx) => {
       if (idButton) {
         if (data.id === idButton && data.amount > 0) {
-          console.log("====> masuk buttonId");
           setTotalPrice({
             amount: totalPrice.amount - data.price,
             length: totalPrice.length - 1,
@@ -95,7 +90,6 @@ export default function Order() {
         }
       }
       if (data.id === e.target.id && data.amount > 0) {
-        console.log("masuk id");
         setTotalPrice({
           amount: totalPrice.amount - data.price,
           length: totalPrice.length - 1,
@@ -109,7 +103,6 @@ export default function Order() {
 
   const deleteItemHandler = (e, idButton = null) => {
     e.preventDefault();
-    console.log("e minus =>", e);
     const filteredItems = itemsOrder?.map((data, idx) => {
       if (idButton) {
         if (data.id == idButton && data.amount > 0) {
