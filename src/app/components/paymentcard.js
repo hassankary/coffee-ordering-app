@@ -1,6 +1,6 @@
 "use client";
 
-export const PaymentCard = ({totalPrice}) => {
+export const PaymentCard = ({totalPrice, onClickCheckBox, checked, disabled, showAlert}) => {
   return (
     <div className="px-2 text-black space-y-4 pb-6">
       <div className="font-semibold">Ringkasan Pembayaran</div>
@@ -36,9 +36,10 @@ export const PaymentCard = ({totalPrice}) => {
         <span className="text-sm font-medium text-gray-900 dark:text-gray-300">
           Saya sudah membaca pesanan
         </span>
-        <input type="checkbox" value="" className="sr-only peer" />
+        <input type="checkbox" value="" className="sr-only peer" onClick={onClickCheckBox} checked={checked} />
         <div className="me-6 relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-700 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
       </label>
+      {showAlert && <span className={`text-sm font-semibold text-red-600`}>Tambah pesanan dulu bro!</span>}
     </div>
   );
 };

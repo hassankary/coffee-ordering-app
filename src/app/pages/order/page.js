@@ -9,6 +9,7 @@ import { Footer } from "@/app/components/footer";
 import { ModalCard } from "@/app/components/modalcard";
 import { HiOutlineMinus, HiOutlinePlus, HiTrash } from "react-icons/hi";
 import { PaymentCard } from "@/app/components/paymentcard";
+import { useRouter } from "next/navigation";
 
 const menusType = [
   "All",
@@ -30,6 +31,7 @@ export default function Order() {
   const [isLoading, setIsLoading] = useState(true);
   const [detailModal, setDetailModal] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+  const [approved, setApproved] = useState({ value: false, alert: false });
   const modalRef = useRef();
 
   const getDataMenu = async () => {
@@ -41,9 +43,17 @@ export default function Order() {
     setIsLoading(false);
   };
 
+  console.log("approved? ===>", approved);
+
   useEffect(() => {
     getDataMenu();
   }, []);
+
+  useEffect(() => {
+    if (currentPage === 0 || currentPage === 1) {
+      setApproved({ value: false, alert: false });
+    }
+  }, [currentPage]);
 
   const tabMenu = (e) => {
     e.preventDefault();
@@ -85,6 +95,7 @@ export default function Order() {
           });
           if (totalPrice.length === 1 && currentPage === 2) {
             setCurrentPage(0);
+            setMenuCards(0);
           }
           return { ...data, amount: data.amount - 1 };
         }
@@ -113,6 +124,7 @@ export default function Order() {
           });
           if (totalPrice.length === data.amount) {
             setCurrentPage(0);
+            setMenuCards(0);
           }
           return { ...data, amount: data.amount - data.amount };
         }
@@ -124,13 +136,36 @@ export default function Order() {
 
   const showModal = (e) => {
     e.preventDefault();
-    console.log("masuk data modal =>", e.target.id);
+    // console.log("masuk data modal =>", e.target.id);
     setOpenModal(true);
     itemsOrder.map((data, idx) => {
       if (data.id == e.target.id) {
         setDetailModal(data);
       }
     });
+  };
+
+  const toggleHandler = (e) => {
+    if (totalPrice.length !== 0) {
+      setApproved({ value: !approved.value, alert: approved.alert });
+    } else {
+      setApproved({ value: approved.value, alert: true });
+      // console.log("approved.alert nyala");
+    }
+  };
+
+  const router = useRouter();
+
+  const footerHandler = () => {
+    if (approved.value) {
+      router.push("/pages/succes");
+    } else {
+      setCurrentPage(2);
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
   };
 
   // console.log("itemsOrder =>", itemsOrder);
@@ -159,13 +194,7 @@ export default function Order() {
             <Footer
               page={currentPage}
               totalPrice={totalPrice}
-              onClick={() => {
-                setCurrentPage(2);
-                window.scrollTo({
-                  top: 0,
-                  behavior: "smooth",
-                });
-              }}
+              onClick={footerHandler}
             />
           )}
           <div className="w-screen min-h-screen p-3 mt-[51px] pb-[52px] bg-[#FFFFFF]">
@@ -360,7 +389,12 @@ export default function Order() {
                       ""
                     )}
                   </div>
-                  <PaymentCard totalPrice={totalPrice} />
+                  <PaymentCard
+                    totalPrice={totalPrice}
+                    onClickCheckBox={(e) => toggleHandler(e)}
+                    checked={approved.value}
+                    showAlert={approved.alert}
+                  />
                 </div>
               ) : (
                 ""
