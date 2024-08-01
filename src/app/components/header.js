@@ -73,7 +73,7 @@ export default function Header({
           </button>
         )}
       </div>
-      <button className="flex justify-center" onClick={onClickOrder}>
+      <button className="flex justify-center font-bold" onClick={onClickOrder}>
         {page}
       </button>
       <div className="flex justify-end items-center space-x-5">

@@ -50,7 +50,7 @@ export const MenuCards = ({
             <button
               id={data?.id}
               onClick={(e) => onClickMinus(e, data?.id)}
-              className="flex w-[25px] h-[25px] bg-[#EAB968] justify-center items-center rounded-full transition"
+              className="flex w-[25px] h-[25px] bg-[#EAB968] hover:bg-[#f5c16f] active:bg-[#cda15a] justify-center items-center rounded-full transition-all"
             >
               <HiOutlineMinus />
             </button>
@@ -60,7 +60,7 @@ export const MenuCards = ({
             <button
               id={data?.id}
               onClick={(e) => onClickPlus(e, data?.id)}
-              className="flex w-[25px] h-[25px] bg-[#EAB968] justify-center items-center rounded-full transition"
+              className="flex w-[25px] h-[25px] bg-[#EAB968] hover:bg-[#f5c16f] active:bg-[#cda15a] justify-center items-center rounded-full transition-all"
             >
               <HiOutlinePlus />
             </button>
