@@ -1,7 +1,7 @@
 {
   "menu": [
     {
-      "id": 0,
+      "id": 1,
       "type": 1,
       "name": "Espresso",
       "description": "Single shot Espresso agar lebih fokus dan hilangkan rasa kantuk mu!",
@@ -11,7 +11,7 @@
       "pic": "/./product/espresso.jpg"
     },
     {
-      "id": 1,
+      "id": 2,
       "type": 1,
       "name": "Ice Americano",
       "description": "Es Americano (Espresso, Air, Es) yang segar untuk hilangkan rasa kantuk mu!",
@@ -21,7 +21,7 @@
       "pic": "/./product/americano.jpg"
     },
     {
-      "id": 2,
+      "id": 3,
       "type": 1,
       "name": "Es Kopi Susu",
       "description": "Es Kopi Susu (Espresso, Susu, Krimer, Gula Aren, Es) yang manis creamy, segar, dan nikmat dalam kondisi apapun!",
@@ -31,7 +31,7 @@
       "pic": "/./product/eskopisusu.jpeg"
     },
     {
-      "id": 3,
+      "id": 4,
       "type": 1,
       "name": "Ice Cafe Latte",
       "description": "Es Cafe Latte (Espresso, Susu, Es) yang milky, segar, dan nikmat dalam kondisi apapun!",
@@ -41,7 +41,7 @@
       "pic": "/./product/icelatte.jpg"
     },
     {
-      "id": 4,
+      "id": 5,
       "type": 1,
       "name": "Ice Black Lime",
       "description": "Ice Black Lime (Espresso, Air, Es, Soda, Lime Syrup) minuman kopi + segar lemon, sangat nikmat, dan sulit dijelaskan!",
@@ -51,7 +51,27 @@
       "pic": "/./product/iceblacklime.jpg"
     },
     {
-      "id": 5,
+      "id": 6,
+      "type": 1,
+      "name": "Ice Greentea Latte",
+      "description": "Es Greentea Latte (Greentea Powder, Susu, Es) mantap!",
+      "price": 28000,
+      "amount": 0,
+      "favorite": true,
+      "pic": "/./product/grtl.jpg"
+    },
+    {
+      "id": 7,
+      "type": 1,
+      "name": "Signature Ice Chocolate",
+      "description": "Es Coklat (Chocolate Powder, Susu, Es) mantap!",
+      "price": 28000,
+      "amount": 0,
+      "favorite": true,
+      "pic": "/./product/chocolate.jpg"
+    },
+    {
+      "id": 8,
       "type": 1,
       "name": "Hot Americano",
       "description": "Americano Hangat (Espresso, Air Hangat) nikmat untuk nugas, kerja, maupun bersantai!",
@@ -61,7 +81,7 @@
       "pic": "/./product/hotamericano.jpg"
     },
     {
-      "id": 6,
+      "id": 9,
       "type": 1,
       "name": "Hot Cafe Latte",
       "description": "Hot Cafe Latte (Espresso, Susu Hangat) nikmat milky bantu hangatkan dirimu!",
@@ -71,7 +91,7 @@
       "pic": "/./product/latte.jpg"
     },
     {
-      "id": 7,
+      "id": 10,
       "type": 1,
       "name": "Hot Cappucino",
       "description": "Cafe Latte Hangat (Espresso, Susu Hangat, Foam) nikmat foamy milky bantu hangatkan dirimu!",
@@ -81,7 +101,7 @@
       "pic": "/./product/cappucino.jpg"
     },
     {
-      "id": 8,
+      "id": 11,
       "type": 4,
       "name": "V60",
       "description": "Manual Brew V60 (Seduh Manual Biji Kopi) dengan flavor buah-buahan!",
@@ -91,7 +111,7 @@
       "pic": "/./product/v60.jpg"
     },
     {
-      "id": 9,
+      "id": 12,
       "type": 4,
       "name": "Japanese Ice Coffee",
       "description": "Manual Brew V60 + Es (Seduh Manual Biji Kopi) dengan flavor buah-buahan, disajikan dingin!",
@@ -101,27 +121,37 @@
       "pic": "/./product/japanese.jpg"
     },
     {
-      "id": 10,
+      "id": 13,
       "type": 2,
       "name": "Tea",
-      "description": "Es Teh (Teh, Air, Classic Syrup) yang segar dan membantu mu agar lebih semangat!",
+      "description": "Es Teh (Teh, Air, Classic Syrup, Es) yang segar dan membantu mu agar lebih semangat!",
       "price": 20000,
       "amount": 0,
       "favorite": false,
       "pic": "/./product/icetea.jpg"
     },
     {
-      "id": 11,
+      "id": 14,
       "type": 2,
       "name": "Lemon Tea",
-      "description": "Es Teh Lemon (Teh, Air, Lime Syrup, Slice Lemon) yang segar dan membantu mu semangat!",
+      "description": "Es Teh Lemon (Teh, Air, Lime Syrup, Slice Lemon, Es) yang segar dan membantu mu semangat!",
       "price": 20000,
       "amount": 0,
       "favorite": true,
       "pic": "/./product/lemontea.jpg"
     },
     {
-      "id": 12,
+      "id": 15,
+      "type": 2,
+      "name": "Lychee Tea",
+      "description": "Es Teh Leci (Teh, Air, Lychee Syrup, Buah Leci, Es) yang segar dan membantu mu semangat!",
+      "price": 20000,
+      "amount": 0,
+      "favorite": true,
+      "pic": "/./product/lycheetea.jpg"
+    },
+    {
+      "id": 16,
       "type": 5,
       "name": "Mineral Water",
       "description": "Air Minum kemasan membantu memenuhi kebutuhan mineral mu!",
@@ -131,7 +161,7 @@
       "pic": "/./product/mineralwater.jpg"
     },
     {
-      "id": 13,
+      "id": 17,
       "type": 3,
       "name": "Ice Cream",
       "description": "Es Krim Vanilla yang membantu mood mu membaik!",
@@ -139,6 +169,16 @@
       "amount": 0,
       "favorite": true,
       "pic": "/./product/icecream.jpg"
+    },
+    {
+      "id": 17,
+      "type": 6,
+      "name": "French Fries",
+      "description": "Kentang goreng!",
+      "price": 20000,
+      "amount": 0,
+      "favorite": true,
+      "pic": "/./product/frenchfries.jpg"
     }
   ]
 }
