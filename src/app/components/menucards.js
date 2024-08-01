@@ -13,9 +13,10 @@ export const MenuCards = ({
   onClickMinus,
   onClickPlus,
   data,
+  props
 }) => {
   return (
-    <div className="flex flex-col bg-[#FFFFFF] rounded-xl shadow-lg">
+    <div {...props} className="flex flex-col bg-[#FFFFFF] rounded-xl shadow-lg">
       {data?.favorite && (
         <div className="z-10 p-1 -mb-10">
 
