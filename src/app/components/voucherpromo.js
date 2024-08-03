@@ -22,6 +22,10 @@ export const VoucherPromo = ({
     }
   }, [discountAmount]);
 
+  useEffect(() => {
+    setOpen(false)
+  }, [totalPrice])
+
   return (
     <div>
       <div className="border border-t-0 text-black rounded-3xl">
