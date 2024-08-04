@@ -8,177 +8,261 @@
       "price": 16000,
       "amount": 0,
       "favorite": false,
-      "pic": "/./product/espresso.jpg"
+      "pic": "/./product/espresso.jpg",
+      "notes": ""
     },
     {
       "id": 2,
       "type": 1,
-      "name": "Ice Americano",
-      "description": "Es Americano (Espresso, Air, Es) yang segar untuk hilangkan rasa kantuk mu!",
+      "name": "Iced Americano",
+      "description": "(Espresso, Water, Ice) yang segar untuk hilangkan rasa kantuk mu!",
       "price": 20000,
       "amount": 0,
       "favorite": false,
-      "pic": "/./product/americano.jpg"
+      "pic": "/./product/americano.jpg",
+      "notes": ""
     },
     {
       "id": 3,
       "type": 1,
       "name": "Es Kopi Susu",
-      "description": "Es Kopi Susu (Espresso, Susu, Krimer, Gula Aren, Es) yang manis creamy, segar, dan nikmat dalam kondisi apapun!",
+      "description": "(Espresso, Milk, Creamer, Palm Sugar, Ice) yang manis creamy, segar, dan nikmat dalam kondisi apapun!",
       "price": 23000,
       "amount": 0,
       "favorite": true,
-      "pic": "/./product/eskopisusu.jpeg"
+      "pic": "/./product/eskopisusu.jpeg",
+      "notes": ""
     },
     {
       "id": 4,
       "type": 1,
-      "name": "Ice Cafe Latte",
-      "description": "Es Cafe Latte (Espresso, Susu, Es) yang milky, segar, dan nikmat dalam kondisi apapun!",
+      "name": "Iced Cafe Latte",
+      "description": "(Espresso, Milk, Ice) yang milky, segar, dan nikmat dalam kondisi apapun!",
       "price": 28000,
       "amount": 0,
-      "favorite": true,
-      "pic": "/./product/icelatte.jpg"
+      "favorite": false,
+      "pic": "/./product/icelatte.jpg",
+      "notes": ""
     },
     {
       "id": 5,
       "type": 1,
-      "name": "Ice Black Lime",
-      "description": "Ice Black Lime (Espresso, Air, Es, Soda, Lime Syrup) minuman kopi + segar lemon, sangat nikmat, dan sulit dijelaskan!",
-      "price": 28000,
+      "name": "Iced Vanilla/Hazelnut/Caramel Latte",
+      "description": "(Espresso, Milk, Ice, Flavour Syrup) tulis pilihan rasa di notes!",
+      "price": 30000,
       "amount": 0,
       "favorite": true,
-      "pic": "/./product/iceblacklime.jpg"
+      "pic": "/./product/icelatte.jpg",
+      "notes": ""
     },
     {
       "id": 6,
       "type": 1,
-      "name": "Ice Greentea Latte",
-      "description": "Es Greentea Latte (Greentea Powder, Susu, Es) mantap!",
-      "price": 28000,
+      "name": "Iced Caramel Macchiato",
+      "description": "(Espresso, Milk, Caramel Sauce, Vanilla Syrup, Ice) segar, dan nikmat dalam kondisi apapun!",
+      "price": 32000,
       "amount": 0,
       "favorite": true,
-      "pic": "/./product/grtl.jpg"
+      "pic": "/./product/macchiato.jpg",
+      "notes": ""
     },
     {
       "id": 7,
       "type": 1,
-      "name": "Signature Ice Chocolate",
-      "description": "Es Coklat (Chocolate Powder, Susu, Es) mantap!",
+      "name": "Iced Black Lime",
+      "description": "(Espresso, Sparkling Water, Lime Syrup, Ice) minuman kopi + segar lemon, sangat nikmat, dan sulit dijelaskan!",
       "price": 28000,
       "amount": 0,
       "favorite": true,
-      "pic": "/./product/chocolate.jpg"
+      "pic": "/./product/iceblacklime.jpg",
+      "notes": ""
     },
     {
       "id": 8,
-      "type": 1,
-      "name": "Hot Americano",
-      "description": "Americano Hangat (Espresso, Air Hangat) nikmat untuk nugas, kerja, maupun bersantai!",
+      "type": 2,
+      "name": "Iced Greentea Latte",
+      "description": "(Greentea/Matcha Powder, Milk, Ice) mantap!",
       "price": 28000,
       "amount": 0,
-      "favorite": false,
-      "pic": "/./product/hotamericano.jpg"
+      "favorite": true,
+      "pic": "/./product/matcha.jpg",
+      "notes": ""
     },
     {
       "id": 9,
-      "type": 1,
-      "name": "Hot Cafe Latte",
-      "description": "Hot Cafe Latte (Espresso, Susu Hangat) nikmat milky bantu hangatkan dirimu!",
+      "type": 2,
+      "name": "Iced Signature Chocolate",
+      "description": "(Chocolate Powder, Milk, Ice) mantap!",
       "price": 28000,
       "amount": 0,
-      "favorite": false,
-      "pic": "/./product/latte.jpg"
+      "favorite": true,
+      "pic": "/./product/chocolate.jpg",
+      "notes": ""
     },
     {
       "id": 10,
       "type": 1,
-      "name": "Hot Cappucino",
-      "description": "Cafe Latte Hangat (Espresso, Susu Hangat, Foam) nikmat foamy milky bantu hangatkan dirimu!",
-      "price": 28000,
+      "name": "Hot Americano",
+      "description": "(Espresso, Hot Water) nikmat untuk nugas, kerja, maupun bersantai!",
+      "price": 20000,
       "amount": 0,
       "favorite": false,
-      "pic": "/./product/cappucino.jpg"
+      "pic": "/./product/hotamericano.jpg",
+      "notes": ""
     },
     {
       "id": 11,
-      "type": 4,
-      "name": "V60",
-      "description": "Manual Brew V60 (Seduh Manual Biji Kopi) dengan flavor buah-buahan!",
-      "price": 30000,
+      "type": 1,
+      "name": "Hot Cafe Latte",
+      "description": "(Espresso, Steamed Milk) nikmat milky bantu hangatkan dirimu!",
+      "price": 28000,
       "amount": 0,
       "favorite": false,
-      "pic": "/./product/v60.jpg"
+      "pic": "/./product/latte.jpg",
+      "notes": ""
     },
     {
       "id": 12,
-      "type": 4,
-      "name": "Japanese Ice Coffee",
-      "description": "Manual Brew V60 + Es (Seduh Manual Biji Kopi) dengan flavor buah-buahan, disajikan dingin!",
-      "price": 32000,
+      "type": 1,
+      "name": "Hot Cappucino",
+      "description": "(Espresso, Steamed Milk) nikmat foamy milky bantu hangatkan dirimu!",
+      "price": 28000,
       "amount": 0,
       "favorite": false,
-      "pic": "/./product/japanese.jpg"
+      "pic": "/./product/cappucino.jpg",
+      "notes": ""
     },
     {
       "id": 13,
-      "type": 2,
-      "name": "Tea",
-      "description": "Es Teh (Teh, Air, Classic Syrup, Es) yang segar dan membantu mu agar lebih semangat!",
-      "price": 20000,
+      "type": 4,
+      "name": "V60",
+      "description": "(Manual Brew, Medium Roast) minuman anak senja!",
+      "price": 30000,
       "amount": 0,
       "favorite": false,
-      "pic": "/./product/icetea.jpg"
+      "pic": "/./product/v60.jpg",
+      "notes": ""
     },
     {
       "id": 14,
-      "type": 2,
-      "name": "Lemon Tea",
-      "description": "Es Teh Lemon (Teh, Air, Lime Syrup, Slice Lemon, Es) yang segar dan membantu mu semangat!",
-      "price": 20000,
+      "type": 4,
+      "name": "Japanese Iced Coffee",
+      "description": "(Manual Brew, Medium Roast, Ice) minuman anak senja buat ngechill.",
+      "price": 32000,
       "amount": 0,
-      "favorite": true,
-      "pic": "/./product/lemontea.jpg"
+      "favorite": false,
+      "pic": "/./product/japanese.jpg",
+      "notes": ""
     },
     {
       "id": 15,
       "type": 2,
-      "name": "Lychee Tea",
-      "description": "Es Teh Leci (Teh, Air, Lychee Syrup, Buah Leci, Es) yang segar dan membantu mu semangat!",
+      "name": "Iced Tea",
+      "description": "(Tea, Classic Syrup, Ice) yang segar dan membantu mu agar lebih semangat!",
       "price": 20000,
       "amount": 0,
-      "favorite": true,
-      "pic": "/./product/lycheetea.jpg"
+      "favorite": false,
+      "pic": "/./product/icetea.jpg",
+      "notes": ""
     },
     {
       "id": 16,
+      "type": 2,
+      "name": "Iced Lemon Tea",
+      "description": "(Tea, Lime Syrup, Slice Lemon, Ice) yang segar dan membantu mu semangat!",
+      "price": 20000,
+      "amount": 0,
+      "favorite": false,
+      "pic": "/./product/lemontea.jpg",
+      "notes": ""
+    },
+    {
+      "id": 17,
+      "type": 2,
+      "name": "Iced Lychee Tea",
+      "description": "(Tea, Lychee Syrup, 3 pcs Lychee, Ice) yang segar dan membantu mu semangat!",
+      "price": 20000,
+      "amount": 0,
+      "favorite": true,
+      "pic": "/./product/lycheetea.jpg",
+      "notes": ""
+    },
+    {
+      "id": 18,
       "type": 5,
       "name": "Mineral Water",
       "description": "Air Minum kemasan membantu memenuhi kebutuhan mineral mu!",
       "price": 10000,
       "amount": 0,
       "favorite": false,
-      "pic": "/./product/mineralwater.jpg"
+      "pic": "/./product/mineralwater.jpg",
+      "notes": ""
     },
     {
-      "id": 17,
+      "id": 19,
       "type": 3,
-      "name": "Ice Cream",
-      "description": "Es Krim Vanilla yang membantu mood mu membaik!",
+      "name": "Vanilla Ice Cream",
+      "description": "Membantu mood mu membaik!",
+      "price": 10000,
+      "amount": 0,
+      "favorite": false,
+      "pic": "/./product/icecream.jpg",
+      "notes": ""
+    },
+    {
+      "id": 20,
+      "type": 3,
+      "name": "Chocolate Ice Cream",
+      "description": "Membantu mood mu membaik!",
       "price": 10000,
       "amount": 0,
       "favorite": true,
-      "pic": "/./product/icecream.jpg"
+      "pic": "/./product/icechocolate.jpg",
+      "notes": ""
     },
     {
-      "id": 17,
+      "id": 21,
       "type": 6,
       "name": "French Fries",
       "description": "Kentang goreng!",
       "price": 20000,
       "amount": 0,
       "favorite": true,
-      "pic": "/./product/frenchfries.jpg"
+      "pic": "/./product/frenchfries.jpg",
+      "notes": ""
+    },
+    {
+      "id": 22,
+      "type": 6,
+      "name": "Chocolatine",
+      "description": "Chocolatine, Dark Chocolate",
+      "price": 20000,
+      "amount": 0,
+      "favorite": false,
+      "pic": "/./product/chocolatine.jpg",
+      "notes": ""
+    },
+    {
+      "id": 23,
+      "type": 6,
+      "name": "Butter Croissant",
+      "description": "Butter Croissant.",
+      "price": 20000,
+      "amount": 0,
+      "favorite": false,
+      "pic": "/./product/buttercr.jpg",
+      "notes": ""
+    },
+    {
+      "id": 24,
+      "type": 6,
+      "name": "Almond Croissant",
+      "description": "Almond Croissant.",
+      "price": 23000,
+      "amount": 0,
+      "favorite": true,
+      "pic": "/./product/almondcr.jpg",
+      "notes": ""
     }
   ]
 }
