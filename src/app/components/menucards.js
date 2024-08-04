@@ -17,15 +17,12 @@ export const MenuCards = ({
 }) => {
   return (
     <div {...props} className="flex flex-col bg-[#FFFFFF] rounded-xl shadow-lg">
+      <div className="flex flex-col group">
       {data?.favorite && (
-        <div className="z-10 p-1 -mb-10">
-
+        <div className="relative -mb-10 self-end w-fit z-10 p-1">
           <IoHeartCircleSharp className="float-right w-8 h-8 fill-red-600" />
-          {/* <BsFillBookmarkHeartFill className="float-right w-8 h-8 fill-red-700" /> */}
-          {/* <HeartIcon className="float-right w-6 h-6 fill-red-600" /> */}
         </div>
       )}
-      <div className="flex flex-col group">
         <Image
           id={data?.id}
           onClick={onClickModal}
@@ -41,10 +38,10 @@ export const MenuCards = ({
           <FaEye />
         </div>
       </div>
-      <div className="p-4 font-medium">
-        <h1 className="text-[#333736]">{data?.name}</h1>
+      <div className="p-4 font-medium overflow-hidden">
+        <h1 className="text-[#333736] text-nowrap truncate">{data?.name}</h1>
         <div className="flex flex-row flex-wrap justify-between items-center">
-          <h1 className="flex text-sm items-center text-[#008C4D]">
+          <h1 className="flex text-sm items-center text-green-600">
             Rp {data?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
           </h1>
           <div className=" w-[70px] flex flex-row justify-between">

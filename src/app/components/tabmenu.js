@@ -12,8 +12,8 @@ export const TabMenu = ({ menusType, onClick, menuCards }) => {
               id={idx}
               className={
                 menuCards == idx
-                  ? "px-[12px] h-8 max-h-[36px] whitespace-nowrap text-white bg-[#008C4D] rounded-lg transition-all"
-                  : "px-[12px] h-8 max-h-[36px] whitespace-nowrap hover:text-white hover:bg-[#008C4D] active:bg-[#008C4D] bg-[#F2F1F1] rounded-lg transition-all duration-[250ms]"
+                  ? "px-[12px] h-8 max-h-[36px] whitespace-nowrap text-white bg-green-600 rounded-lg transition-all"
+                  : "px-[12px] h-8 max-h-[36px] whitespace-nowrap hover:text-white hover:bg-green-600 active:bg-green-600 bg-[#F2F1F1] rounded-lg transition-all duration-[250ms]"
               }
               onClick={onClick}
             >

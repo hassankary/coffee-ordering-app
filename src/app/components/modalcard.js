@@ -26,7 +26,7 @@ export const ModalCard = ({ detailModal, show, onClose, onClick }) => {
             <div className="flex-col text-black font-semibold space-y-2">
               <div className=" text-lg">{detailModal?.name}</div>
               <div className="font-normal">{detailModal?.description}</div>
-              <div className=" text-green-500">
+              <div className=" text-green-600">
                 Rp.{" "}
                 {detailModal?.price
                   .toString()

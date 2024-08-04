@@ -27,8 +27,8 @@ export const VoucherPromo = ({
   }, [totalPrice])
 
   return (
-    <div>
-      <div className="border border-t-0 text-black rounded-3xl">
+    <>
+      <div className="border border-t-0 my-4 text-black rounded-3xl">
         <div
           onClick={() => setOpen(!open)}
           className={`flex px-4 py-4 bg-gradient-to-r ${
@@ -100,6 +100,6 @@ export const VoucherPromo = ({
           <h1>batalkan diskon</h1>
         </button>}
       </div>
-    </div>
+    </>
   );
 };

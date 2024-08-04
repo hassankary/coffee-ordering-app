@@ -24,14 +24,14 @@ import { Done } from "@/app/components/done";
 const menusType = [
   "All",
   "Coffee",
-  "Tea",
+  "Non Coffee",
   "Dessert",
   "Manual Brew",
   "Water",
   "Foods",
 ];
 
-const $Page = ["Order", "Favorite", "Cart", "Logout"];
+const $Page = ["Order", "Best Seller", "Cart", "Logout"];
 
 export default function Order() {
   const [itemsOrder, setItemsOrder] = useState([]);
@@ -52,11 +52,10 @@ export default function Order() {
   });
   const [discountAmount, setDiscountAmount] = useState(0);
   const [checkout, setCheckout] = useState({
-    //this must be for Redux, but not now
     order: [],
     totalPrice: 0,
     finalPrice: 0,
-  });
+  }); //this must be for Redux, but not now
   const [done, setDone] = useState(false); //this must be for Redux, but not now
   const modalRef = useRef();
 
@@ -68,9 +67,6 @@ export default function Order() {
     setItemsOrder(response);
     setIsLoading(false);
   };
-
-  console.log("totalPrice ===>", totalPrice);
-  console.log("approved ===>", approved);
 
   useEffect(() => {
     getDataMenu();
@@ -88,7 +84,6 @@ export default function Order() {
 
   useEffect(() => {
     const discountedPrice = (totalPrice.amount * discountAmount) / 100;
-    console.log("discountedPrice", discountedPrice);
     setTotalPrice({
       ...totalPrice,
       discounted: totalPrice.amount - discountedPrice,
@@ -207,8 +202,6 @@ export default function Order() {
     }
   };
 
-  const router = useRouter();
-
   const footerHandler = () => {
     if (approved.value) {
       const updatedCheckout = itemsOrder.filter((item) => item.amount !== 0);
@@ -234,55 +227,11 @@ export default function Order() {
     }
   };
 
-  // ========= generate random number ==========
-
-  // const [newNumber, SetNewNumber] = useState([]);
-  // const [currentTime, setCurrentTime] = useState(
-  //   new Date().toLocaleTimeString()
-  // );
-
-  // const generateRandomNumbers = (length) => {
-  //   const numbers = [];
-  //   for (let i = 0; i < length; i++) {
-  //     // Menghasilkan angka integer antara 0 dan 9
-  //     const randomNumber = Math.floor(Math.random() * 10);
-  //     numbers.push(randomNumber);
-  //   }
-  //   return numbers;
-  // };
-
-  // const generateSixNumber = () => {
-  //   const randomNumbers = generateRandomNumbers(6);
-  //   SetNewNumber(randomNumbers);
-  //   setCurrentTime(new Date().toLocaleTimeString());
-  // };
-
-  // console.log("itemsOrder =>", itemsOrder);
-  // console.log("detailModal =>", detailModal);
-
-  const checkoutHandler = () => {
-    if (approved.value) {
-      const updatedCheckout = itemsOrder.filter((item) => item.amount !== 0);
-      setCheckout({
-        order: updatedCheckout,
-        totalPrice: totalPrice.amount,
-        finalPrice: totalPrice.discounted,
-      });
-      setDone(true);
-    } else {
-      setApproved({ ...approved, alertChekout: true });
-      window.scrollTo({
-        top: 1000,
-        behavior: "smooth",
-      });
-    }
-  };
-
   console.log("checkout ==>", checkout);
 
   return (
     <>
-      <title>Coffee Ordering Mobile Web by Hassan Kaeru</title>
+      <title>Coffee Ordering Mobile Web by Hassankary</title>
       {done ? (
         <Done
           checkout={checkout}
@@ -358,16 +307,16 @@ export default function Order() {
                               onClickMinus={minusButtonHandler}
                               onClickPlus={plusButtonHandler}
                             />
-                          ) : menuCards == data?.type ? (
-                            <MenuCards
-                              key={idx}
-                              onClickModal={showModal}
-                              data={data}
-                              onClickMinus={minusButtonHandler}
-                              onClickPlus={plusButtonHandler}
-                            />
                           ) : (
-                            ""
+                            menuCards == data?.type && (
+                              <MenuCards
+                                key={idx}
+                                onClickModal={showModal}
+                                data={data}
+                                onClickMinus={minusButtonHandler}
+                                onClickPlus={plusButtonHandler}
+                              />
+                            )
                           );
                         })}
                       </div>
@@ -401,17 +350,6 @@ export default function Order() {
                       );
                     })} */}
                     </div>
-                    {/* ======= Nomor Pesanan ===== */}
-                    {/* <div className="text-black">Nomor Pesanan = #{newNumber}</div>
-                  <div className="text-black">
-                    Waktu Pesanan = {currentTime}
-                  </div>
-                  <button
-                    onClick={generateSixNumber}
-                    className=" text-black bg-red-500 px-2 py-1"
-                  >
-                    Generate
-                  </button> */}
                   </>
                 ) : currentPage == 1 ? (
                   <div className="grid grid-cols-2 gap-3">
@@ -431,8 +369,8 @@ export default function Order() {
                     })}
                   </div>
                 ) : currentPage == 2 ? (
-                  <div className="flex flex-col space-y-4">
-                    <div className="flex flex-col space-y-4">
+                  <div className="flex flex-col">
+                    <div className="flex flex-col">
                       {totalPrice?.amount !== 0 ? (
                         <>
                           {itemsOrder?.map((data, idx) => {
@@ -441,11 +379,11 @@ export default function Order() {
                               return (
                                 <div
                                   key={idx}
-                                  className="flex w-full justify-between p-2 bg-[#FFFFFF] text-black border-b space-x-3"
+                                  className="flex w-full justify-between px-2 py-3 bg-[#FFFFFF] text-black border-b space-x-3"
                                 >
-                                  <div className="flex flex-auto flex-col justify-between">
+                                  <div className="flex flex-auto flex-col justify-between overflow-hidden">
                                     <div className="flex font-semibold">
-                                      {data.name}
+                                      <p className="">{data.name}</p>
                                     </div>
                                     <div className="flex ">
                                       Rp{" "}
@@ -453,7 +391,7 @@ export default function Order() {
                                         .toString()
                                         .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                                     </div>
-                                    <div className="flex w-[80px] justify-between col-span-1 rounded-xl bg-transparent text-white">
+                                    <div className="flex w-[80px] mt-1 justify-between col-span-1 rounded-full bg-transparent text-white">
                                       <button
                                         id={data.id}
                                         onClick={(e) =>
@@ -477,11 +415,11 @@ export default function Order() {
                                       </button>
                                     </div>
                                   </div>
-                                  <div className="flex justify-center">
+                                  <div className="flex flex-col justify-center items-center space-y-2">
                                     <Image
                                       id={data.id}
                                       onClick={showModal}
-                                      className="rounded-xl "
+                                      className="max-w-[80px] max-h-[80px] border hover:border-green-400 rounded-xl transition-all"
                                       src={data.pic}
                                       width={80}
                                       height={80}
@@ -504,7 +442,7 @@ export default function Order() {
                               );
                             }
                           })}
-                          <div className="flex px-2 py-3 text-black border-t border-b justify-between">
+                          <div className="flex px-2 py-3 mt-4 text-black border-t border-b justify-between">
                             <div className="flex flex-col">
                               <h1 className=" font-semibold">
                                 Ada lagi yang mau dibeli?
@@ -526,19 +464,6 @@ export default function Order() {
                               </button>
                             </div>
                           </div>
-                          {/* <button
-                          onClick={() =>
-                            setTotalPrice({
-                              ...totalPrice,
-                              amount:
-                                totalPrice.amount - totalPrice.amount * 0.1,
-                            })
-                          }
-                          className="flex px-3 py-2 text-sm  text-black justify-between rounded-xl hover:bg-green-100 transition-all"
-                        >
-                          <h1>Voucher 10%</h1>
-                          <span>Apply</span>
-                        </button> */}
                           <VoucherPromo
                             totalPrice={totalPrice}
                             setTotalPrice={setTotalPrice}
@@ -567,14 +492,6 @@ export default function Order() {
                       onClickToMenu={() => setCurrentPage(0)}
                       discountAmount={discountAmount}
                     />
-                    {/* <div className=" flex justify-center">
-                      <button
-                        onClick={checkoutHandler}
-                        className="px-3 py-1 text-white font-bold bg-red-500 hover:bg-red-600 rounded-xl transition-all"
-                      >
-                        Checkout
-                      </button>
-                    </div> */}
                   </div>
                 ) : (
                   ""

@@ -15,7 +15,11 @@ export const PaymentCard = ({
   return (
     <div className="text-black space-y-4 pb-6">
       <div className="font-semibold">Ringkasan Pembayaran</div>
-      <div className={`flex flex-col p-4 border ${discountAmount !== 0 ? `border-green-800` : `` } rounded-xl`}>
+      <div
+        className={`flex flex-col p-4 border ${
+          discountAmount !== 0 ? `border-green-800` : ``
+        } rounded-xl`}
+      >
         <div className="flex flex-col pb-3 border-b">
           <div className="flex justify-between">
             <h1>Harga ({totalPrice.length} item) </h1>
@@ -40,17 +44,16 @@ export const PaymentCard = ({
                 {((discountAmount / 100) * totalPrice.amount)
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                
               </h1>
             </div>
           )}
           <div className="flex justify-between">
-            <h1>{"Tax (include)"}</h1>
-            <h1>0</h1>
+            <h1>{"Pajak (include)"}</h1>
+            <h1>Rp 0</h1>
           </div>
           <div className="flex justify-between">
             <h1>{"Biaya jasa (free)"}</h1>
-            <h1>0</h1>
+            <h1>Rp 0</h1>
           </div>
         </div>
         <div className="flex justify-between pt-3 font-bold">
