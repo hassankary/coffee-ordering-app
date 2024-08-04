@@ -62,10 +62,10 @@ export default function Order() {
   const getDataMenu = async () => {
     try {
       const request = await fetch(`https://mock-server-teal.vercel.app/menu`);
+      // const request = await fetch(`http://localhost:4000/menu`);
       if (!request.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
-      // const request = await fetch(`http://localhost:4000/menu`);
       const response = await request.json();
 
       setItemsOrder(response);
@@ -232,6 +232,17 @@ export default function Order() {
         behavior: "smooth",
       });
     }
+  };
+
+  const closeModal = (e, modalId) => {
+    const filteredItem = itemsOrder.map((data, i) => {
+      if (data.id === modalId) {
+        return { ...data, notes: detailModal?.notes };
+      }
+      return data;
+    });
+    setItemsOrder(filteredItem);
+    setOpenModal(false);
   };
 
   return (
@@ -476,8 +487,10 @@ export default function Order() {
               <ModalCard
                 detailModal={detailModal}
                 show={openModal}
-                onClick={() => setOpenModal(false)}
-                onClose={() => setOpenModal(false)}
+                setDetailModal={setDetailModal}
+                onClick={(e) => closeModal(e, detailModal?.id)}
+                onClose={(e) => closeModal(e, detailModal?.id)}
+                autoFocus = {false}
               />
             </div>
           </div>

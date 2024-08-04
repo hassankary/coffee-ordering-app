@@ -1,8 +1,17 @@
 "use client";
 import { Modal } from "flowbite-react";
 import Image from "next/image";
+import { useState } from "react";
 
-export const ModalCard = ({ detailModal, show, onClose, onClick }) => {
+export const ModalCard = ({
+  detailModal,
+  show,
+  onClose,
+  onClick,
+  setDetailModal,
+  ...props
+}) => {
+
   return (
     <Modal
       className="flex bottom-0 right-0 top-0 left-0 pt-[110px] pb-[180px]"
@@ -10,6 +19,7 @@ export const ModalCard = ({ detailModal, show, onClose, onClick }) => {
       size={"sm"}
       show={show}
       onClose={onClose}
+      {...props}
     >
       <div className="flex w-full justify-center bg-transparent">
         <div className="flex w-full max-w-[414px] p-6 justify-center rounded-2xl bg-slate-50">
@@ -24,7 +34,7 @@ export const ModalCard = ({ detailModal, show, onClose, onClick }) => {
               unoptimized
             />
             <div className="flex-col text-black font-semibold space-y-2">
-              <div className=" text-lg">{detailModal?.name}</div>
+              <button className="text-lg focus:border-none active:border-none">{detailModal?.name}</button>
               <div className="font-normal">{detailModal?.description}</div>
               <div className=" text-green-600">
                 Rp.{" "}
@@ -32,6 +42,19 @@ export const ModalCard = ({ detailModal, show, onClose, onClick }) => {
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
               </div>
+              {detailModal?.amount !== 0 && (
+                <input
+                  id="inputNotes"
+                  type="text"
+                  placeholder="Notes..."
+                  value={detailModal?.notes}
+                  onChange={(e) =>
+                    setDetailModal({ ...detailModal, notes: e.target.value })
+                  }
+                  className="w-full rounded-xl"
+                  autoFocus={false}
+                />
+              )}
               <div className="flex justify-center">
                 <button
                   onClick={onClick}

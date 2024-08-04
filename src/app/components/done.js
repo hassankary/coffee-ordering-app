@@ -52,7 +52,7 @@ export const Done = ({ checkout, discountAmount, totalPrice }) => {
               <div className="w-2.5 h-5 rounded-l-full -mt-[9px] bg-white"></div>
             </div>
           </div>
-          <div className=" flex px-4 text-center justify-center items-center text-white space-x-2">
+          <div className="hidden px-4 text-center justify-center items-center text-white space-x-2">
             <span>Your order has been confirmed!</span>
             <span>
               {" "}
@@ -99,20 +99,24 @@ export const Done = ({ checkout, discountAmount, totalPrice }) => {
                     <p className=" w-3/4">: 8170 - HASSAN ASKARY</p>
                   </div>
                 </div>
-                <div className="flex flex-col w-full">
+                <div className="flex flex-col px-2 w-full">
                   <h1 className=" pb-1 text-center">Order Items:</h1>
                   <table className="border-spacing-3 table-fixed">
                     <tbody>
                       {checkout?.order.map((data, idx) => {
                         return (
-                          <tr key={idx}>
-                            <td className="text-center">{data.amount}x</td>
-                            <td className="">{data.name}</td>
-                            <td className="text-right">
-                              Rp{" "}
+                          <tr key={idx} className="">
+                            <td className="pr-1 py-0 align-top">{data.amount}x </td>
+                            <td className="pr-1 py-0">
+                              <p className="py-0">{data.name}</p>
+                              {data.notes !== "" && (
+                                <p className=" text-xs py-0 italic">notes: {data.notes}</p>
+                              )}
+                            </td>
+                            <td className="align-top text-right py-0">
                               {(data.price * data.amount)
                                 .toString()
-                                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                             </td>
                           </tr>
                         );
@@ -136,7 +140,7 @@ export const Done = ({ checkout, discountAmount, totalPrice }) => {
                               Rp{" "}
                               {totalPrice.amount
                                 .toString()
-                                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                             </td>
                           </tr>
                           <tr className="text-green-500">
@@ -145,23 +149,24 @@ export const Done = ({ checkout, discountAmount, totalPrice }) => {
                               - Rp{" "}
                               {((discountAmount / 100) * totalPrice.amount)
                                 .toString()
-                                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                             </td>
                           </tr>
                         </>
                       )}
-                      <tr>
+                      <tr className=" text-lg">
                         <td className="">Grand Total</td>
                         <td className="text-right">
                           Rp{" "}
                           {totalPrice?.discounted
                             .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                         </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
+                <div className="flex w-full justify-center">{"==== THANK YOU ===="}</div>
               </div>
             </div>
           </div>
