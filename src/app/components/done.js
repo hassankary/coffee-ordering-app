@@ -110,7 +110,7 @@ export const Done = ({ checkout, discountAmount, totalPrice }) => {
                             <td className="pr-1 py-0">
                               <p className="py-0">{data.name}</p>
                               {data.notes !== "" && (
-                                <p className=" text-xs py-0 italic">notes: {data.notes}</p>
+                                <p className=" text-xs py-0">Notes: {data.notes}</p>
                               )}
                             </td>
                             <td className="align-top text-right py-0">

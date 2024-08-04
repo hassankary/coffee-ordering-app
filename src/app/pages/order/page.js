@@ -149,6 +149,9 @@ export default function Order() {
             setCurrentPage(0);
             setMenuCards(0);
           }
+          if (data.amount === 1) {
+            return { ...data, amount: data.amount - 1, notes: "" };
+          }
           return { ...data, amount: data.amount - 1 };
         }
       }
@@ -163,6 +166,7 @@ export default function Order() {
       }
       return data;
     });
+    console.log("filteredItems", filteredItems);
     setItemsOrder(filteredItems);
   };
 
@@ -183,7 +187,7 @@ export default function Order() {
             setCurrentPage(0);
             setMenuCards(0);
           }
-          return { ...data, amount: data.amount - data.amount };
+          return { ...data, amount: data.amount - data.amount, notes: "" };
         }
       }
       return data;
@@ -244,6 +248,9 @@ export default function Order() {
     setItemsOrder(filteredItem);
     setOpenModal(false);
   };
+
+  // console.log("detailModal =>", detailModal);
+  // console.log("itemsOrder =>", itemsOrder);
 
   return (
     <>
@@ -356,6 +363,7 @@ export default function Order() {
                     })}
                   </div>
                 ) : currentPage == 2 ? (
+                  // ====================== PAGE CART ===================
                   <div className="flex flex-col">
                     <div className="flex flex-col">
                       {totalPrice?.amount !== 0 ? (
@@ -372,12 +380,17 @@ export default function Order() {
                                     <div className="flex font-semibold">
                                       <p className="">{data.name}</p>
                                     </div>
-                                    <div className="flex ">
+                                    <div className="flex text-green-600 font-semibold">
                                       Rp{" "}
                                       {total
                                         .toString()
                                         .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                                     </div>
+                                    {data.notes !== "" && (
+                                      <div className="flex text-sm">
+                                        <p className=" font-semibold font-sans">Notes: <span className=" font-normal">{data.notes}</span></p>
+                                      </div>
+                                    )}
                                     <div className="flex w-[80px] mt-1 justify-between col-span-1 rounded-full bg-transparent text-white">
                                       <button
                                         id={data.id}
@@ -490,7 +503,7 @@ export default function Order() {
                 setDetailModal={setDetailModal}
                 onClick={(e) => closeModal(e, detailModal?.id)}
                 onClose={(e) => closeModal(e, detailModal?.id)}
-                autoFocus = {false}
+                autoFocus={false}
               />
             </div>
           </div>

@@ -47,6 +47,7 @@ export const ModalCard = ({
                   id="inputNotes"
                   type="text"
                   placeholder="Notes..."
+                  maxLength="50"
                   value={detailModal?.notes}
                   onChange={(e) =>
                     setDetailModal({ ...detailModal, notes: e.target.value })
