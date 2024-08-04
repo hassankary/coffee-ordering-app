@@ -3,10 +3,10 @@ import Lottie from "lottie-react";
 import Image from "next/image";
 import Link from "next/link";
 import checkList from "@/app/components/lottie/success.json";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineFileDone } from "react-icons/ai";
 import { TbPlayerTrackNextFilled } from "react-icons/tb";
-
+import { FaRegSmileBeam } from "react-icons/fa";
 
 export const Done = ({ checkout, discountAmount, totalPrice }) => {
   const [dateOrder, setDateOrder] = useState(null);
@@ -25,8 +25,6 @@ export const Done = ({ checkout, discountAmount, totalPrice }) => {
     }));
   }, []);
 
-  console.log("numbers ", numbers);
-
   if (!dateOrder) {
     return (
       <div className=" w-full flex justify-center font-mono">
@@ -41,47 +39,40 @@ export const Done = ({ checkout, discountAmount, totalPrice }) => {
   return (
     <>
       <title>Coffee Ordering Mobile Web by Hassan Kaeru</title>
-      <div className=" w-full flex justify-center font-mono">
+      <div className="w-full flex justify-center font-mono">
         <div className="flex flex-col justify-center itemsb min-h-screen w-[414px] bg-green-500 content-center">
-          {/* <div className="flex justify-center items-center -mt-[95px]">
-            <Lottie
-              animationData={checkList}
-              height={300}
-              width={300}
-              // className=" max-w-[300px]"
-            />
-          </div>*/}
-          <div className=" flex flex-col justify-center items-center mb-20">
-            <div className=" z-10 flex p-4 justify-center rounded-full bg-white hover:scale-110 active:scale-110 transition-all ">
-              <span className=" fixed mt-2.5 -mr-[24px] w-3 h-3 rounded-full bg-green-400 animate-ping"></span>
-              <span className=" fixed mt-3 -mr-6 w-2 h-2 rounded-full bg-green-400 "></span>
+          <div className=" flex flex-col py-8 justify-center items-center mb-9">
+            <div className="z-10 flex p-4 justify-center rounded-full bg-white hover:scale-110 active:scale-110 transition-all ">
+              <span className="absolute mt-2.5 -mr-[24px] w-3 h-3 rounded-full bg-green-400 animate-ping"></span>
+              <span className="absolute mt-3 -mr-6 w-2 h-2 rounded-full bg-green-400 "></span>
               <AiOutlineFileDone className="flex w-16 h-16 p-3 text-white rounded-full bg-black shadow-lg" />
             </div>
-            <div className="flex w-full bg-white h-[3px] -mt-[48px]"></div>
+            <div className="flex w-full justify-between bg-white h-[3px] -mt-[48px]">
+              <div className="w-2.5 h-5 rounded-r-full -mt-[9px] bg-white"></div>
+              <div className="w-2.5 h-5 rounded-l-full -mt-[9px] bg-white"></div>
+            </div>
           </div>
-          {/* <div className=" flex justify-center mb-10 text-white">
-            Your order has been recorded.
-          </div> */}
-          {/* ========= LINE ========= */}
+          <div className=" flex px-4 text-center justify-center items-center text-white space-x-2">
+            <span>Your order has been confirmed!</span>
+            <span>
+              {" "}
+              <FaRegSmileBeam />
+            </span>
+          </div>
           <div className="flex mx-4 h-6 bg-black -mb-4 rounded-full"></div>
           <div className="flex flex-col px-6">
             <div className="flex flex-col items-center justify-center p-2 text-black bg-white border">
-              <div className="flex w-full justify-center items-center py-2 font-bold font-sans text-3xl hover:text-white bg-green-500 transition-all">
-                <div className="flex items-center py-2 ">
-                  {/* <AiOutlineFileDone className=" w-10 h-10" /> */}
+              <div className="flex w-full justify-center items-center py-2 font-bold font-sans text-3xl text-white bg-green-600 transition-all">
+                <div className="flex items-center py-1 ">
                   <div className="flex justify-center">Receipt</div>
                 </div>
               </div>
               <div className="w-full space-y-2">
                 <div className="flex flex-col px-2 py-2 border-b border-slate-500">
                   <div className="flex">
-                    <span className=" w-1/4">On Shift</span>
-                    <p className=" w-3/4">: Hassan Askary</p>
-                  </div>
-                  <div className="flex">
                     <span className=" w-1/4">Bill No</span>
                     <p className=" w-3/4">
-                      : #00
+                      : #001
                       {numbers?.order.map((number, idx) => (
                         <span key={idx}>{number}</span>
                       ))}
@@ -103,17 +94,14 @@ export const Done = ({ checkout, discountAmount, totalPrice }) => {
                       : {formattedDate} | {formattedTime}
                     </p>
                   </div>
+                  <div className="flex">
+                    <span className=" w-1/4">On Shift</span>
+                    <p className=" w-3/4">: 8170 - HASSAN ASKARY</p>
+                  </div>
                 </div>
                 <div className="flex flex-col w-full">
                   <h1 className=" pb-1 text-center">Order Items:</h1>
                   <table className="border-spacing-3 table-fixed">
-                    {/* <thead>
-                    <tr className="border-b border-slate-500 justify-between">
-                      <th className="">Qty</th>
-                      <th className="">Menu</th>
-                      <th className="">Price</th>
-                    </tr>
-                  </thead> */}
                     <tbody>
                       {checkout?.order.map((data, idx) => {
                         return (
@@ -186,14 +174,13 @@ export const Done = ({ checkout, discountAmount, totalPrice }) => {
               ></path>
             </svg>
           </div>
-          <div className="flex justify-center mt-[15px]">
+          <div className="flex justify-center py-8 -mt-7">
             <Link
               href={"/"}
               className="flex p-4 justify-center text-center font-bold font-mono text-2xl bg-black text-black active:text-gray-800 active:bg-gray-800 hover:scale-110 active:scale-110 rounded-full transition-all"
             >
               <h1 className="bg-white rounded-full p-2 transition-all">
-
-              <TbPlayerTrackNextFilled className="h-7 w-7 transition-all" />
+                <TbPlayerTrackNextFilled className="h-7 w-7 transition-all" />
               </h1>
             </Link>
           </div>
