@@ -60,12 +60,19 @@ export default function Order() {
   const modalRef = useRef();
 
   const getDataMenu = async () => {
-    // const request = await fetch(`https://mock-server-teal.vercel.app/menu`);
-    const request = await fetch(`http://localhost:4000/menu`);
-    const response = await request.json();
+    try {
+      const request = await fetch(`https://mock-server-teal.vercel.app/menu`);
+      if (!request.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      // const request = await fetch(`http://localhost:4000/menu`);
+      const response = await request.json();
 
-    setItemsOrder(response);
-    setIsLoading(false);
+      setItemsOrder(response);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   useEffect(() => {
@@ -227,8 +234,6 @@ export default function Order() {
     }
   };
 
-  console.log("checkout ==>", checkout);
-
   return (
     <>
       <title>Coffee Ordering Mobile Web by Hassankary</title>
@@ -320,35 +325,6 @@ export default function Order() {
                           );
                         })}
                       </div>
-                      {/* {itemsOrder?.map((data, idx) => {
-                      return (
-                        <div
-                          key={idx}
-                          className="grid grid-cols-3 p-2 rounded-md bg-[#FFFFFF] text-[#333736] shadow-lg"
-                        >
-                          <p className=" col-span-2">
-                            {data.name} {data.price}
-                          </p>
-                          <div className="flex justify-between col-span-1 rounded-xl bg-slate-950 text-white">
-                            <button
-                              id={data.id}
-                              onClick={minusButtonHandler}
-                              className="px-2 rounded-xl transition bg-red-600 hover:bg-red-500 active:bg-red-400"
-                            >
-                              -
-                            </button>
-                            <p>{data.amount}</p>
-                            <button
-                              id={data.id}
-                              onClick={plusButtonHandler}
-                              className="px-2 rounded-xl transition bg-green-600 hover:bg-green-500 active:bg-green-400"
-                            >
-                              +
-                            </button>
-                          </div>
-                        </div>
-                      );
-                    })} */}
                     </div>
                   </>
                 ) : currentPage == 1 ? (
@@ -475,7 +451,6 @@ export default function Order() {
                                 top: 1000,
                                 behavior: "smooth",
                               });
-                              console.log("masuk");
                             }}
                           />
                         </>
