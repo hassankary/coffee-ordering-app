@@ -13,7 +13,7 @@ export const PaymentCard = ({
   onClickToMenu,
 }) => {
   return (
-    <div className="text-black space-y-4 pb-6">
+    <div className="text-black space-y-4 pb-2">
       <div className="font-semibold">Ringkasan Pembayaran</div>
       <div
         className={`flex flex-col p-4 border ${

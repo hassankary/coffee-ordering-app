@@ -71,10 +71,6 @@ export const VoucherPromo = ({
                   key={idx}
                   id={idx + 1}
                   onClick={() => {
-                    // setTotalPrice({
-                    //   ...totalPrice,
-                    //   amount: totalPrice.amount - totalPrice.amount * diskon,
-                    // });
                     window.scrollTo({
                       top: 1000,
                       behavior: "smooth",

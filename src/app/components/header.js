@@ -13,6 +13,7 @@ import {
   HiShoppingCart,
   HiViewGrid,
 } from "react-icons/hi";
+import { motion as m } from "framer-motion";
 
 export default function Header({
   page,
@@ -37,14 +38,16 @@ export default function Header({
 
   return (
     <div className="z-50 top-0 fixed w-full max-w-[414px] h-[52px] grid grid-cols-3 px-3 py-3 justify-between text-[#333736] text-lg font-semibold bg-[#FFFFFF] shadow-sm">
-      <div className="flex items-center ">
+      <div className="flex items-center overflow-hidden">
         {page == "Order" ? (
           <Dropdown
             placement="bottom"
             renderTrigger={() => (
-              <span>
+              <m.span initial={{ y: "100%" }}
+              animate={{ y: "0%" }}
+              transition={{ duration: 0.3, ease: "easeIn" }}>
                 <Bars4Icon className="h-[26px] w-[26px] fill-[#333736] transition-all" />
-              </span>
+              </m.span>
             )}
           >
             {buttonDropdown.map((data, idx) => {
@@ -65,12 +68,15 @@ export default function Header({
             })}
           </Dropdown>
         ) : (
-          <button
+          <m.button
+          initial={{ y: "100%" }}
+            animate={{ y: "0%" }}
+            transition={{ duration: 0.3, ease: "easeIn", }}
             onClick={onClickOrder}
             className="h-[26px] w-[26px] fill-[#333736]"
           >
             <ArrowLeftIcon className="fill-[#333736] transition-all" />
-          </button>
+          </m.button>
         )}
       </div>
       <button className="flex justify-center font-bold" onClick={onClickOrder}>

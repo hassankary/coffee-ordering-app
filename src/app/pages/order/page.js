@@ -15,6 +15,7 @@ import { VoucherPromo } from "@/app/components/voucherpromo";
 import Link from "next/link";
 import { Done } from "@/app/components/done";
 import { OrderCart } from "@/app/components/ordercart";
+import { motion as m } from "framer-motion";
 
 const menusType = [
   "All",
@@ -161,7 +162,7 @@ export default function Order() {
       }
       return data;
     });
-    console.log("filteredItems", filteredItems);
+    // console.log("filteredItems", filteredItems);
     setItemsOrder(filteredItems);
   };
 
@@ -261,7 +262,7 @@ export default function Order() {
         />
       ) : (
         <div className="flex w-full justify-center">
-          <div className="flex max-w-[414px] justify-center font-sans">
+          <m.div className="flex max-w-[414px] justify-center font-sans">
             {/* ============ HEADER ============ */}
             <Header
               page={$Page[currentPage]}
@@ -296,9 +297,9 @@ export default function Order() {
                 onClick={footerHandler}
               />
             )}
-            <div className="w-screen min-h-screen p-3 mt-[51px] pb-[52px] bg-[#FFFFFF]">
+            <div className="w-screen min-h-screen mt-[51px] bg-[#FFFFFF]">
               {/* ========== SPA Render Components ========= */}
-              <div className="w-full max-w-[414px] h-full space-y-3">
+              <div className="w-full max-w-[414px] p-3 pb-[62px] h-full space-y-3 overflow-hidden">
                 {currentPage == 0 ? (
                   <>
                     <TabMenu
@@ -307,16 +308,23 @@ export default function Order() {
                       onClick={(e) => tabMenuHandler(e)}
                     />
                     {/* ===== Order Section ===== */}
-                    <div className="z-10 grid grid-cols-1 gap-2 ">
-                      {isLoading && (
-                        <div className=" flex h-screen -mt-[90px] w-full justify-center items-center">
+                    {isLoading && (
+                      <m.div>
+                        <div className=" flex h-screen -mt-[108px] w-full justify-center items-center">
                           <Spinner
                             color="success"
                             aria-label="Success spinner example"
                             className=""
                           />
                         </div>
-                      )}
+                      </m.div>
+                    )}
+                    <m.div
+                      initial={{ x: "-100%" }}
+                      animate={{ x: "0%" }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                      className="z-10 grid grid-cols-1 gap-2 "
+                    >
                       <div className="grid grid-cols-2 gap-3">
                         {/* ===== Order Cards ===== */}
                         {itemsOrder?.map((data, idx) => {
@@ -341,10 +349,15 @@ export default function Order() {
                           );
                         })}
                       </div>
-                    </div>
+                    </m.div>
                   </>
                 ) : currentPage == 1 ? (
-                  <div className="grid grid-cols-2 gap-3">
+                  <m.div
+                    initial={{ x: "100%" }}
+                    animate={{ x: "0%" }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    className="grid grid-cols-2 gap-3"
+                  >
                     {itemsOrder?.map((data, idx) => {
                       return (
                         <>
@@ -359,51 +372,62 @@ export default function Order() {
                         </>
                       );
                     })}
-                  </div>
-                ) : currentPage == 2 ? (
-                  // ====================== PAGE CART ===================
-                  <div className="flex flex-col">
-                    <div className="flex flex-col">
-                      {totalPrice?.amount !== 0 ? (
-                        <>
-                          <OrderCart
-                          itemsOrder={itemsOrder}
-                          minusButtonHandler={minusButtonHandler}
-                          plusButtonHandler={plusButtonHandler}
-                          setCurrentPage={setCurrentPage}
-                          deleteItemHandler={deleteItemHandler}
-                          showModal={showModal}
-                          />
-                          <VoucherPromo
-                            totalPrice={totalPrice}
-                            setTotalPrice={setTotalPrice}
-                            discountAmount={discountAmount}
-                            setDiscountAmount={setDiscountAmount}
-                            onClick={() => {
-                              setCurrentPage(2);
-                              window.scrollTo({
-                                top: 1000,
-                                behavior: "smooth",
-                              });
-                            }}
-                          />
-                        </>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                    <PaymentCard
-                      totalPrice={totalPrice}
-                      onChange={(e) => toggleHandler(e)}
-                      checked={approved.value}
-                      showAlertBuy={approved.alertBuy}
-                      showAlertChekout={approved.alertChekout}
-                      onClickToMenu={() => setCurrentPage(0)}
-                      discountAmount={discountAmount}
-                    />
-                  </div>
+                  </m.div>
                 ) : (
-                  ""
+                  currentPage == 2 && (
+                    // ====================== PAGE CART ===================
+                    <div className="flex flex-col">
+                      <m.div
+                        initial={{ x: "100%" }}
+                        animate={{ x: "0%" }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className="flex flex-col"
+                      >
+                        {totalPrice?.amount !== 0 ? (
+                          <>
+                            <OrderCart
+                              itemsOrder={itemsOrder}
+                              minusButtonHandler={minusButtonHandler}
+                              plusButtonHandler={plusButtonHandler}
+                              setCurrentPage={setCurrentPage}
+                              deleteItemHandler={deleteItemHandler}
+                              showModal={showModal}
+                            />
+                            <VoucherPromo
+                              totalPrice={totalPrice}
+                              setTotalPrice={setTotalPrice}
+                              discountAmount={discountAmount}
+                              setDiscountAmount={setDiscountAmount}
+                              onClick={() => {
+                                setCurrentPage(2);
+                                window.scrollTo({
+                                  top: 1000,
+                                  behavior: "smooth",
+                                });
+                              }}
+                            />
+                          </>
+                        ) : (
+                          ""
+                        )}
+                      </m.div>
+                      <m.div
+                        initial={{ x: "100%" }}
+                        animate={{ x: "0%" }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                      >
+                        <PaymentCard
+                          totalPrice={totalPrice}
+                          onChange={(e) => toggleHandler(e)}
+                          checked={approved.value}
+                          showAlertBuy={approved.alertBuy}
+                          showAlertChekout={approved.alertChekout}
+                          onClickToMenu={() => setCurrentPage(0)}
+                          discountAmount={discountAmount}
+                        />
+                      </m.div>
+                    </div>
+                  )
                 )}
               </div>
               {/* ======= MODAL ======= */}
@@ -416,7 +440,7 @@ export default function Order() {
                 autoFocus={false}
               />
             </div>
-          </div>
+          </m.div>
         </div>
       )}
     </>
