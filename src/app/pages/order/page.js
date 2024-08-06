@@ -259,7 +259,7 @@ export default function Order() {
 
   return (
     <>
-      <title>Coffee Ordering Mobile Web by Hassankary</title>
+      <title>Coffee Ordering Mobile Web by Hassan Kaeru</title>
       {done ? (
         <Done
           checkout={checkout}

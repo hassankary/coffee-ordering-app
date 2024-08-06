@@ -22,9 +22,19 @@ export const PaymentCard = ({
   // console.log("radioChekced =>", radioChekced);
 
   const paymentArr = [
-    { title: "gopay", id: "paymentGopay", value: "gopay", icon: <FaWallet className="h-4 w-4"/> },
+    {
+      title: "gopay",
+      id: "paymentGopay",
+      value: "gopay",
+      icon: <FaWallet className="h-4 w-4 text-sky-500" />,
+    },
     // { title: "bitcoin", id: "paymentBitcoin", value: "bitcoin", icon: <FaBitcoin className="h-4 w-4"/> },
-    { title: "cash", id: "paymentCash", value: "cash", icon: <IoCashOutline className="h-4 w-4"/> },
+    {
+      title: "cash",
+      id: "paymentCash",
+      value: "cash",
+      icon: <IoCashOutline className="h-4 w-4 text-green-600" />,
+    },
   ];
 
   return (
@@ -86,19 +96,19 @@ export const PaymentCard = ({
         {paymentArr?.map((data, i) => {
           return (
             <div key={i} className="flex items-center mb-4">
-              <input
-                id={data.id}
-                type="radio"
-                checked={radioChekced === data.value}
-                value={data.value}
-                onChange={handleChange}
-                name="default-radio"
-                className="w-[18px] h-[18px] text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-              />
               <label
-                for={data.id}
-                className="ms-3 flex w-full items-center text-sm font-medium text-gray-900 dark:text-gray-300 space-x-2"
+                htmlFor={data.id}
+                className="flex w-full items-center text-sm font-medium text-gray-900 dark:text-gray-300 space-x-2"
               >
+                <input
+                  id={data.id}
+                  type="radio"
+                  checked={radioChekced === data.value}
+                  value={data.value}
+                  onChange={handleChange}
+                  name="default-radio"
+                  className="w-[18px] h-[18px] mr-2 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
                 {data.icon}
                 <span className=" align-top">{data.title}</span>
               </label>
