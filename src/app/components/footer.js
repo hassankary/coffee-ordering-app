@@ -19,12 +19,12 @@ export const Footer = ({ onClick, totalPrice, page }) => {
               initial={{ x: "100%" }}
               animate={{ x: "0%" }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="flex flex-row items-center animate-pulse transition-all"
+              className="flex flex-row items-center text-white animate-pulse transition-all"
             >
               Checkout Now!
             </m.span>
             <span className="">
-              <HiOutlineChevronDoubleRight className="flex w-5 h-5 duration-400 animate-pulse" />
+              <HiOutlineChevronDoubleRight className="flex w-5 h-5 text-white fill-white duration-400 animate-pulse" />
             </span>
           </>
         ) : (
@@ -33,7 +33,7 @@ export const Footer = ({ onClick, totalPrice, page }) => {
               initial={{ y: "100%" }}
               animate={{ y: "0%" }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className=" bg-green-500 rounded-full w-6 h-6 duration-400 animate-pulse"
+              className=" bg-green-500 rounded-full w-6 h-6 text-white fill-white duration-400 animate-pulse"
             >
               {totalPrice.length}
             </m.span>

@@ -46,7 +46,7 @@ export const MenuCards = ({
               <button
                 id={data?.id}
                 onClick={(e) => onClickPlus(e, data?.id)}
-                className="flex w-full h-[32.6px] border bg-green-600 hover:bg-green-500 active:bg-green-500 justify-center items-center rounded-full transition-all"
+                className="flex w-full h-[32.6px] text-white border bg-green-600 hover:bg-green-500 active:bg-green-500 justify-center items-center rounded-full transition-all"
               >
                 Order
               </button>
@@ -57,7 +57,7 @@ export const MenuCards = ({
                   onClick={(e) => onClickMinus(e, data?.id)}
                   className="flex w-[25px] h-[25px] bg-green-600 hover:bg-green-500 active:bg-green-500 justify-center items-center rounded-full transition-all"
                 >
-                  <HiOutlineMinus />
+                  <HiOutlineMinus className="text-white fill-white" />
                 </button>
                 <p className="flex text-sm text-black justify-center items-center">
                   {data?.amount}
@@ -67,7 +67,7 @@ export const MenuCards = ({
                   onClick={(e) => onClickPlus(e, data?.id)}
                   className="flex w-[25px] h-[25px] bg-green-600 hover:bg-green-500 active:bg-green-500 justify-center items-center rounded-full transition-all"
                 >
-                  <HiOutlinePlus />
+                  <HiOutlinePlus className="text-white fill-white" />
                 </button>
               </div>
             )}
