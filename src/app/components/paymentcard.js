@@ -1,6 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
+import { IoCashOutline } from "react-icons/io5";
+import { FaBitcoin } from "react-icons/fa6";
+import { FaWallet } from "react-icons/fa";
 
 export const PaymentCard = ({
   totalPrice,
@@ -11,7 +15,18 @@ export const PaymentCard = ({
   showAlertBuy,
   showAlertChekout,
   onClickToMenu,
+  radioChekced,
+  setRadioChecked,
+  handleChange,
 }) => {
+  // console.log("radioChekced =>", radioChekced);
+
+  const paymentArr = [
+    { title: "gopay", id: "paymentGopay", value: "gopay", icon: <FaWallet className="h-4 w-4"/> },
+    // { title: "bitcoin", id: "paymentBitcoin", value: "bitcoin", icon: <FaBitcoin className="h-4 w-4"/> },
+    { title: "cash", id: "paymentCash", value: "cash", icon: <IoCashOutline className="h-4 w-4"/> },
+  ];
+
   return (
     <div className="text-black space-y-4 pb-2">
       <div className="font-semibold">Ringkasan Pembayaran</div>
@@ -65,6 +80,31 @@ export const PaymentCard = ({
               .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
           </h1>
         </div>
+      </div>
+      <div className="font-semibold">Metode Pembayaran</div>
+      <div className="px-2">
+        {paymentArr?.map((data, i) => {
+          return (
+            <div key={i} className="flex items-center mb-4">
+              <input
+                id={data.id}
+                type="radio"
+                checked={radioChekced === data.value}
+                value={data.value}
+                onChange={handleChange}
+                name="default-radio"
+                className="w-[18px] h-[18px] text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              />
+              <label
+                for={data.id}
+                className="ms-3 flex w-full items-center text-sm font-medium text-gray-900 dark:text-gray-300 space-x-2"
+              >
+                {data.icon}
+                <span className=" align-top">{data.title}</span>
+              </label>
+            </div>
+          );
+        })}
       </div>
       <label className="flex w-full justify-between items-center cursor-pointer">
         <span className="text-sm font-medium text-gray-900 dark:text-gray-300">

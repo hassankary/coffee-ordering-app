@@ -14,7 +14,7 @@ export const VoucherPromo = ({
 }) => {
   const [open, setOpen] = useState(false);
 
-  console.log("discountAmount =>", discountAmount);
+  // console.log("discountAmount =>", discountAmount);
 
   useEffect(() => {
     if (discountAmount === 0) {
@@ -75,7 +75,6 @@ export const VoucherPromo = ({
                       top: 1000,
                       behavior: "smooth",
                     });
-                    console.log("tP.discounted", totalPrice.discounted);
                     setDiscountAmount(data);
                     setOpen(false);
                   }}

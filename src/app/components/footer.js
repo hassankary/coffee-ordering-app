@@ -1,16 +1,6 @@
 "use client";
-import {
-  HeartIcon,
-  MinusCircleIcon,
-  PlusCircleIcon,
-} from "@heroicons/react/24/solid";
 import { motion as m } from "framer-motion";
-import Image from "next/image";
-import {
-  HiOutlineChevronDoubleRight,
-  HiOutlineMinus,
-  HiOutlinePlus,
-} from "react-icons/hi";
+import { HiOutlineChevronDoubleRight } from "react-icons/hi";
 
 export const Footer = ({ onClick, totalPrice, page }) => {
   return (
@@ -29,7 +19,7 @@ export const Footer = ({ onClick, totalPrice, page }) => {
               initial={{ x: "100%" }}
               animate={{ x: "0%" }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="flex flex-row items-center animate-pulse"
+              className="flex flex-row items-center animate-pulse transition-all"
             >
               Checkout Now!
             </m.span>
@@ -40,10 +30,11 @@ export const Footer = ({ onClick, totalPrice, page }) => {
         ) : (
           <div className="flex justify-around w-full">
             <m.span
-            initial={{ y: "100%" }}
-            animate={{ y: "0%" }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className=" bg-green-500 rounded-full w-6 h-6 duration-400 animate-pulse">
+              initial={{ y: "100%" }}
+              animate={{ y: "0%" }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className=" bg-green-500 rounded-full w-6 h-6 duration-400 animate-pulse"
+            >
               {totalPrice.length}
             </m.span>
             <m.span

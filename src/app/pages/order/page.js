@@ -51,7 +51,9 @@ export default function Order() {
     order: [],
     totalPrice: 0,
     finalPrice: 0,
+    payment: "",
   }); //this must be for Redux, but not now
+  const [radioChekced, setRadioChecked] = useState("gopay");
   const [done, setDone] = useState(false); //this must be for Redux, but not now
   const modalRef = useRef();
 
@@ -214,6 +216,11 @@ export default function Order() {
     setOpenModal(false);
   };
 
+
+  const handleChange = (event) => {
+    setRadioChecked(event.target.value);
+  };
+
   const toggleHandler = (e) => {
     if (totalPrice.length !== 0) {
       setApproved({ ...approved, value: !approved.value, alertChekout: false });
@@ -229,6 +236,7 @@ export default function Order() {
         order: updatedCheckout,
         totalPrice: totalPrice.amount,
         finalPrice: totalPrice.discounted,
+        payment: radioChekced,
       });
       setDone(true);
     } else {
@@ -247,6 +255,8 @@ export default function Order() {
     }
   };
   
+  // console.log("checkout ===>", checkout )
+
   return (
     <>
       <title>Coffee Ordering Mobile Web by Hassankary</title>
@@ -413,6 +423,9 @@ export default function Order() {
                         transition={{ duration: 0.3, ease: "easeOut" }}
                       >
                         <PaymentCard
+                          radioChekced={radioChekced}
+                          setRadioChecked={setRadioChecked}
+                          handleChange={handleChange}
                           totalPrice={totalPrice}
                           onChange={(e) => toggleHandler(e)}
                           checked={approved.value}

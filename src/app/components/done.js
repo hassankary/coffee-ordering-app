@@ -96,6 +96,10 @@ export const Done = ({ checkout, discountAmount, totalPrice }) => {
                       </p>
                     </div>
                     <div className="flex">
+                      <span className=" w-1/4">Payment</span>
+                      <p className="w-3/4 capitalize">: {checkout.payment}</p>
+                    </div>
+                    <div className="flex">
                       <span className=" w-1/4">Date</span>
                       <p className=" w-3/4">
                         : {formattedDate} | {formattedTime}
