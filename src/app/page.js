@@ -1,10 +1,27 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { BiSolidShoppingBag } from "react-icons/bi";
 import { SiAdblock } from "react-icons/si";
 
 export default function Home() {
+  const [alert, setAlert] = useState(false);
+
+  const modalRef = useRef();
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (!modalRef.current?.contains(e.target)) {
+        setAlert(false);
+      }
+    };
+    document.addEventListener("click", handler);
+    return () => {
+      document.removeEventListener("click", handler);
+    };
+  }, []);
+
   return (
     <>
       <title>Coffee Ordering Mobile Web by Hassan Kaeru</title>
@@ -32,10 +49,23 @@ export default function Home() {
             </Link>
           </div>
           <div className="fixed flex w-full max-w-[414px] justify-end bottom-0">
-            <button className="flex justify-center items-center px-3 py-1.5 font-bold space-x-2 bg-[#EAB968] hover:bg-[#e1ac57] active:scale-110 rounded-tl-xl transition-all">
-              <SiAdblock/>
-              <h1>Admin</h1>
-            </button>
+            <div
+              ref={modalRef}
+              className="flex flex-col justify-end items-end space-y-2"
+            >
+              {alert && (
+                <div className="px-2 py-1 mr-1 text-xs text-center rounded-lg text-red-700 font-bold bg-black transition-all">
+                  <h1 className="animate-pulse">Administrator page is currently under maintenance.</h1>
+                </div>
+              )}
+              <button
+                onClick={() => setAlert(true)}
+                className="flex w-fit justify-center items-center px-3 py-1.5 font-bold space-x-2 bg-[#EAB968] hover:bg-[#e1ac57] active:scale-110 rounded-tl-xl transition-all"
+              >
+                <SiAdblock />
+                <h1>Admin</h1>
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -162,7 +162,6 @@ export default function Order() {
       }
       return data;
     });
-    // console.log("filteredItems", filteredItems);
     setItemsOrder(filteredItems);
   };
 
@@ -204,6 +203,17 @@ export default function Order() {
     });
   };
 
+  const closeModal = (e, modalId) => {
+    const filteredItem = itemsOrder.map((data, i) => {
+      if (data.id === modalId) {
+        return { ...data, notes: detailModal?.notes };
+      }
+      return data;
+    });
+    setItemsOrder(filteredItem);
+    setOpenModal(false);
+  };
+
   const toggleHandler = (e) => {
     if (totalPrice.length !== 0) {
       setApproved({ ...approved, value: !approved.value, alertChekout: false });
@@ -236,21 +246,7 @@ export default function Order() {
       });
     }
   };
-
-  const closeModal = (e, modalId) => {
-    const filteredItem = itemsOrder.map((data, i) => {
-      if (data.id === modalId) {
-        return { ...data, notes: detailModal?.notes };
-      }
-      return data;
-    });
-    setItemsOrder(filteredItem);
-    setOpenModal(false);
-  };
-
-  // console.log("detailModal =>", detailModal);
-  // console.log("itemsOrder =>", itemsOrder);
-
+  
   return (
     <>
       <title>Coffee Ordering Mobile Web by Hassankary</title>
@@ -261,7 +257,7 @@ export default function Order() {
           totalPrice={totalPrice}
         />
       ) : (
-        <div className="flex w-full justify-center">
+        <div className=" z-30 flex w-full justify-center">
           <m.div className="flex max-w-[414px] justify-center font-sans">
             {/* ============ HEADER ============ */}
             <Header
