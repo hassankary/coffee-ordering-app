@@ -3,7 +3,6 @@ import { HeartIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { HiOutlineMinus, HiOutlinePlus } from "react-icons/hi";
 import { FaEye } from "react-icons/fa6";
-import { BsFillBookmarkHeartFill } from "react-icons/bs";
 import { IoHeartCircleSharp } from "react-icons/io5";
 
 export const MenuCards = ({

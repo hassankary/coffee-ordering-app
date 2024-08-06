@@ -1,9 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
 import { IoCashOutline } from "react-icons/io5";
-import { FaBitcoin } from "react-icons/fa6";
 import { FaWallet } from "react-icons/fa";
 
 export const PaymentCard = ({

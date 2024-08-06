@@ -1,8 +1,5 @@
 "use client";
-import Lottie from "lottie-react";
-import Image from "next/image";
 import Link from "next/link";
-import checkList from "@/app/components/lottie/success.json";
 import { useEffect, useState } from "react";
 import { AiOutlineFileDone } from "react-icons/ai";
 import { TbPlayerTrackNextFilled } from "react-icons/tb";
