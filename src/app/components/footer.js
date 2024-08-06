@@ -41,7 +41,7 @@ export const Footer = ({ onClick, totalPrice, page }) => {
               initial={{ x: "100%" }}
               animate={{ x: "0%" }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className=""
+              className="text-white"
             >
               Total Rp{" "}
               {totalPrice.amount
@@ -49,7 +49,7 @@ export const Footer = ({ onClick, totalPrice, page }) => {
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
             </m.span>
             <span className="flex justify-center items-center">
-              <HiOutlineChevronDoubleRight className="flex w-5 h-5 duration-400 animate-pulse" />
+              <HiOutlineChevronDoubleRight className="flex w-5 h-5 text-white fill-white duration-400 animate-pulse" />
             </span>
           </div>
         )}
