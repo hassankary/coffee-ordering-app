@@ -267,6 +267,7 @@ export default function Order() {
             {/* ============ HEADER ============ */}
             <Header
               page={$Page[currentPage]}
+              totalPrice={totalPrice.length}
               onClickOrder={() => {
                 setCurrentPage(0);
                 setMenuCards(0);

@@ -7,12 +7,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
 import { Dropdown } from "flowbite-react";
-import {
-  HiHeart,
-  HiLogout,
-  HiShoppingCart,
-  HiViewGrid,
-} from "react-icons/hi";
+import { HiHeart, HiLogout, HiShoppingCart, HiViewGrid } from "react-icons/hi";
 import { motion as m } from "framer-motion";
 
 export default function Header({
@@ -20,12 +15,26 @@ export default function Header({
   onClickOrder,
   onClickFavorite,
   onClickCart,
+  totalPrice,
 }) {
   const router = useRouter();
 
   const buttonMenu = [
-    { icon: <HeartIcon />, function: onClickFavorite },
-    { icon: <ShoppingCartIcon />, function: onClickCart },
+    {
+      icon: <HeartIcon />,
+      function: onClickFavorite,
+    },
+    {
+      icon: (
+        <>
+          <ShoppingCartIcon />
+          {totalPrice !== 0 && (
+            <p className="absolute -mt-6 ml-5  w-2 h-2 border border-white bg-red-600 rounded-full"></p>
+          )}
+        </>
+      ),
+      function: onClickCart,
+    },
   ];
 
   const buttonDropdown = [
@@ -43,9 +52,11 @@ export default function Header({
           <Dropdown
             placement="bottom"
             renderTrigger={() => (
-              <m.span initial={{ y: "100%" }}
-              animate={{ y: "0%" }}
-              transition={{ duration: 0.3, ease: "easeIn" }}>
+              <m.span
+                initial={{ y: "100%" }}
+                animate={{ y: "0%" }}
+                transition={{ duration: 0.3, ease: "easeIn" }}
+              >
                 <Bars4Icon className="h-[26px] w-[26px] fill-[#333736] transition-all" />
               </m.span>
             )}
@@ -69,9 +80,9 @@ export default function Header({
           </Dropdown>
         ) : (
           <m.button
-          initial={{ y: "100%" }}
+            initial={{ y: "100%" }}
             animate={{ y: "0%" }}
-            transition={{ duration: 0.3, ease: "easeIn", }}
+            transition={{ duration: 0.3, ease: "easeIn" }}
             onClick={onClickOrder}
             className="h-[26px] w-[26px] fill-[#333736]"
           >
@@ -79,7 +90,15 @@ export default function Header({
           </m.button>
         )}
       </div>
-      <button className="flex justify-center font-bold" onClick={onClickOrder}>
+      <button
+        className="flex justify-center font-bold"
+        onClick={() => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        }}
+      >
         {page}
       </button>
       <div className="flex justify-end items-center space-x-5">

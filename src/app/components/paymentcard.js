@@ -20,14 +20,14 @@ export const PaymentCard = ({
 
   const paymentArr = [
     {
-      title: "gopay",
+      title: "GoPay",
       id: "paymentGopay",
       value: "gopay",
       icon: <FaWallet className="h-4 w-4 text-sky-500" />,
     },
     // { title: "bitcoin", id: "paymentBitcoin", value: "bitcoin", icon: <FaBitcoin className="h-4 w-4"/> },
     {
-      title: "cash",
+      title: "Cash",
       id: "paymentCash",
       value: "cash",
       icon: <IoCashOutline className="h-4 w-4 text-green-600" />,
@@ -107,7 +107,7 @@ export const PaymentCard = ({
                   className="w-[18px] h-[18px] mr-2 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
                 {data.icon}
-                <span className=" align-top">{data.title}</span>
+                <span className="align-top">{data.title}</span>
               </label>
             </div>
           );
