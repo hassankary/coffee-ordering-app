@@ -24,7 +24,6 @@ export default function Home() {
 
   return (
     <>
-      <title>Coffee Ordering Mobile Web by Hassan Kaeru</title>
       <div className=" w-full flex justify-center">
         <div className="flex flex-col justify-center min-h-screen w-[414px] bg-green-500 content-center">
           <div className="flex justify-center ">
