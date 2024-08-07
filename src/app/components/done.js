@@ -32,7 +32,10 @@ export const Done = ({ checkout, discountAmount, totalPrice }) => {
   }
 
   const formattedDate = dateOrder.toLocaleDateString();
-  const formattedTime = dateOrder.toLocaleTimeString();
+  const formattedTime = dateOrder.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
   return (
     <>
@@ -184,7 +187,7 @@ export const Done = ({ checkout, discountAmount, totalPrice }) => {
                 </div>
               </div>
               {/* ========= WAVE SVG ======== */}
-              <div className="text-black -mt-4">
+              <div className="text-black -mt-[14px]">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                   <path
                     fill="white"

@@ -23,7 +23,7 @@ export const MenuCards = ({
         <Image
           id={data?.id}
           onClick={onClickModal}
-          className="rounded-t-xl transition-all"
+          className="rounded-xl lg:rounded-b-none transition-all"
           src={data?.pic}
           width={200}
           height={200}
@@ -31,7 +31,7 @@ export const MenuCards = ({
           quality={100}
           unoptimized
         />
-        <div onClick={onClickModal} className="flex opacity-0 group-hover:opacity-100 -mt-6 h-6 justify-center items-center text-white bg-black bg-opacity-60 rounded-t-xl transition-all duration-300">
+        <div onClick={onClickModal} className="hidden lg:flex opacity-0 group-hover:opacity-100 -mt-6 h-6 justify-center items-center text-white bg-black bg-opacity-60 rounded-t-xl transition-all duration-300">
           <FaEye />
         </div>
       </div>

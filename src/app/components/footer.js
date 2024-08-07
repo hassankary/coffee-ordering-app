@@ -24,7 +24,7 @@ export const Footer = ({ onClick, totalPrice, page }) => {
               Checkout Now!
             </m.span>
             <span className="">
-              <HiOutlineChevronDoubleRight className="flex w-5 h-5 text-white fill-white duration-400 animate-pulse" />
+              <HiOutlineChevronDoubleRight className="flex w-5 h-5 text-white animate-pulse"/>
             </span>
           </>
         ) : (
@@ -33,7 +33,7 @@ export const Footer = ({ onClick, totalPrice, page }) => {
               initial={{ y: "100%" }}
               animate={{ y: "0%" }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className=" bg-green-500 rounded-full w-6 h-6 text-white fill-white duration-400 animate-pulse"
+              className=" bg-green-500 rounded-full w-6 h-6 text-white animate-pulse"
             >
               {totalPrice.length}
             </m.span>
@@ -49,7 +49,7 @@ export const Footer = ({ onClick, totalPrice, page }) => {
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
             </m.span>
             <span className="flex justify-center items-center">
-              <HiOutlineChevronDoubleRight className="flex w-5 h-5 text-white fill-white duration-400 animate-pulse" />
+              <HiOutlineChevronDoubleRight className="flex w-5 h-5 text-white animate-pulse"/>
             </span>
           </div>
         )}
