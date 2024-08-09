@@ -65,12 +65,21 @@ export const ModalCard = ({
               )}
             </div>
             <div className="flex justify-center">
-              <button
-                onClick={onClick}
-                className="px-4 py-2 bg-red-600 text-white active:scale-[95%] active:bg-red-500 rounded-xl transition-all"
-              >
-                Close
-              </button>
+              {detailModal?.amount !== 0 ? (
+                <button
+                  onClick={onClick}
+                  className="px-4 py-2 font-semibold bg-green-600 text-white active:scale-[95%] active:bg-green-500 rounded-xl transition-all"
+                >
+                  Ok
+                </button>
+              ) : (
+                <button
+                  onClick={onClick}
+                  className="px-4 py-2 font-semibold bg-red-600 text-white active:scale-[95%] active:bg-red-500 rounded-xl transition-all"
+                >
+                  Close
+                </button>
+              )}
             </div>
           </div>
         </div>
